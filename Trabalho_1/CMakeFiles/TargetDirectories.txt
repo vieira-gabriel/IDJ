@@ -1,3 +1,0 @@
-/home/gabriel/Documentos/Git/IDJ/Trabalho_1/CMakeFiles/edit_cache.dir
-/home/gabriel/Documentos/Git/IDJ/Trabalho_1/CMakeFiles/rebuild_cache.dir
-/home/gabriel/Documentos/Git/IDJ/Trabalho_1/CMakeFiles/Trabalho_1.dir

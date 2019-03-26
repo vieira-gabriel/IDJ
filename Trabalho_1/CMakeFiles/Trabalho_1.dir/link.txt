@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/Trabalho_1.dir/main.cpp.o  -o Trabalho_1 -rdynamic 

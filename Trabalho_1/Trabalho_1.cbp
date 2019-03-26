@@ -44,7 +44,9 @@
          <Option type="1" />
          <Option compiler="gcc" />
          <Compiler>
+            <Add directory="/home/gabriel/Documentos/Git/IDJ/Trabalho_1/INCLUDE_DIR" />
             <Add directory="/usr/include" />
+            <Add directory="/usr/include/SDL2" />
             <Add directory="/usr/include/c++/5" />
             <Add directory="/usr/include/c++/5/backward" />
             <Add directory="/usr/include/x86_64-linux-gnu" />
@@ -67,7 +69,9 @@
          <Option type="1" />
          <Option compiler="gcc" />
          <Compiler>
+            <Add directory="/home/gabriel/Documentos/Git/IDJ/Trabalho_1/INCLUDE_DIR" />
             <Add directory="/usr/include" />
+            <Add directory="/usr/include/SDL2" />
             <Add directory="/usr/include/c++/5" />
             <Add directory="/usr/include/c++/5/backward" />
             <Add directory="/usr/include/x86_64-linux-gnu" />
@@ -84,6 +88,12 @@
          </MakeCommands>
       </Target>
       </Build>
+      <Unit filename="/home/gabriel/Documentos/Git/IDJ/Trabalho_1/Game.cpp">
+         <Option target="Trabalho_1"/>
+      </Unit>
+      <Unit filename="/home/gabriel/Documentos/Git/IDJ/Trabalho_1/Game.h">
+         <Option target="Trabalho_1"/>
+      </Unit>
       <Unit filename="/home/gabriel/Documentos/Git/IDJ/Trabalho_1/main.cpp">
          <Option target="Trabalho_1"/>
       </Unit>
