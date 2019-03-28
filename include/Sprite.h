@@ -1,29 +1,29 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include "SDL.h"
+#include <SDL.h>
 #include <iostream>
 
 using namespace std;
 
 class Sprite
 {
-  private:
-    SDL_Texture *texture;
-    int width;
-    int hight;
-    SDL_Rect clipRect;
+private:
+  SDL_Texture *texture;
+  int width;
+  int height;
+  SDL_Rect clipRect;
 
-  public:
-    Sprite();
-    Sprite(string);
-    ~Sprite();
-    void Open(string);
-    void SetClip(int, int, int, int);
-    void Render(int, int);
-    int GetWidth();
-    int GetHight();
-    bool IsOpen();
+public:
+  Sprite();
+  Sprite(string file);
+  ~Sprite();
+  void Open(string file);
+  void SetClip(int x, int y, int w, int h);
+  void Render(int x, int y);
+  int GetWidth();
+  int GetHeight();
+  bool IsOpen();
 };
 
 #endif SPRITE_H

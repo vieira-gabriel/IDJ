@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gabriel/Documentos/Git/IDJ/Trabalho_1
+CMAKE_SOURCE_DIR = /home/gabriel/Documentos/Git/IDJ
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/gabriel/Documentos/Git/IDJ/Trabalho_1/build
+CMAKE_BINARY_DIR = /home/gabriel/Documentos/Git/IDJ/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Trabalho_1.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/Trabalho_1.dir/flags.make
 
 CMakeFiles/Trabalho_1.dir/main.cpp.o: CMakeFiles/Trabalho_1.dir/flags.make
 CMakeFiles/Trabalho_1.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gabriel/Documentos/Git/IDJ/Trabalho_1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Trabalho_1.dir/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Trabalho_1.dir/main.cpp.o -c /home/gabriel/Documentos/Git/IDJ/Trabalho_1/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gabriel/Documentos/Git/IDJ/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Trabalho_1.dir/main.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Trabalho_1.dir/main.cpp.o -c /home/gabriel/Documentos/Git/IDJ/main.cpp
 
 CMakeFiles/Trabalho_1.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Trabalho_1.dir/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gabriel/Documentos/Git/IDJ/Trabalho_1/main.cpp > CMakeFiles/Trabalho_1.dir/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gabriel/Documentos/Git/IDJ/main.cpp > CMakeFiles/Trabalho_1.dir/main.cpp.i
 
 CMakeFiles/Trabalho_1.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Trabalho_1.dir/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gabriel/Documentos/Git/IDJ/Trabalho_1/main.cpp -o CMakeFiles/Trabalho_1.dir/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gabriel/Documentos/Git/IDJ/main.cpp -o CMakeFiles/Trabalho_1.dir/main.cpp.s
 
 CMakeFiles/Trabalho_1.dir/main.cpp.o.requires:
 
@@ -81,17 +81,43 @@ CMakeFiles/Trabalho_1.dir/main.cpp.o.provides: CMakeFiles/Trabalho_1.dir/main.cp
 CMakeFiles/Trabalho_1.dir/main.cpp.o.provides.build: CMakeFiles/Trabalho_1.dir/main.cpp.o
 
 
+CMakeFiles/Trabalho_1.dir/Game.cpp.o: CMakeFiles/Trabalho_1.dir/flags.make
+CMakeFiles/Trabalho_1.dir/Game.cpp.o: ../Game.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gabriel/Documentos/Git/IDJ/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Trabalho_1.dir/Game.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Trabalho_1.dir/Game.cpp.o -c /home/gabriel/Documentos/Git/IDJ/Game.cpp
+
+CMakeFiles/Trabalho_1.dir/Game.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Trabalho_1.dir/Game.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gabriel/Documentos/Git/IDJ/Game.cpp > CMakeFiles/Trabalho_1.dir/Game.cpp.i
+
+CMakeFiles/Trabalho_1.dir/Game.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Trabalho_1.dir/Game.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gabriel/Documentos/Git/IDJ/Game.cpp -o CMakeFiles/Trabalho_1.dir/Game.cpp.s
+
+CMakeFiles/Trabalho_1.dir/Game.cpp.o.requires:
+
+.PHONY : CMakeFiles/Trabalho_1.dir/Game.cpp.o.requires
+
+CMakeFiles/Trabalho_1.dir/Game.cpp.o.provides: CMakeFiles/Trabalho_1.dir/Game.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Trabalho_1.dir/build.make CMakeFiles/Trabalho_1.dir/Game.cpp.o.provides.build
+.PHONY : CMakeFiles/Trabalho_1.dir/Game.cpp.o.provides
+
+CMakeFiles/Trabalho_1.dir/Game.cpp.o.provides.build: CMakeFiles/Trabalho_1.dir/Game.cpp.o
+
+
 # Object files for target Trabalho_1
 Trabalho_1_OBJECTS = \
-"CMakeFiles/Trabalho_1.dir/main.cpp.o"
+"CMakeFiles/Trabalho_1.dir/main.cpp.o" \
+"CMakeFiles/Trabalho_1.dir/Game.cpp.o"
 
 # External object files for target Trabalho_1
 Trabalho_1_EXTERNAL_OBJECTS =
 
 Trabalho_1: CMakeFiles/Trabalho_1.dir/main.cpp.o
+Trabalho_1: CMakeFiles/Trabalho_1.dir/Game.cpp.o
 Trabalho_1: CMakeFiles/Trabalho_1.dir/build.make
 Trabalho_1: CMakeFiles/Trabalho_1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/gabriel/Documentos/Git/IDJ/Trabalho_1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Trabalho_1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/gabriel/Documentos/Git/IDJ/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Trabalho_1"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Trabalho_1.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -100,6 +126,7 @@ CMakeFiles/Trabalho_1.dir/build: Trabalho_1
 .PHONY : CMakeFiles/Trabalho_1.dir/build
 
 CMakeFiles/Trabalho_1.dir/requires: CMakeFiles/Trabalho_1.dir/main.cpp.o.requires
+CMakeFiles/Trabalho_1.dir/requires: CMakeFiles/Trabalho_1.dir/Game.cpp.o.requires
 
 .PHONY : CMakeFiles/Trabalho_1.dir/requires
 
@@ -108,6 +135,6 @@ CMakeFiles/Trabalho_1.dir/clean:
 .PHONY : CMakeFiles/Trabalho_1.dir/clean
 
 CMakeFiles/Trabalho_1.dir/depend:
-	cd /home/gabriel/Documentos/Git/IDJ/Trabalho_1/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gabriel/Documentos/Git/IDJ/Trabalho_1 /home/gabriel/Documentos/Git/IDJ/Trabalho_1 /home/gabriel/Documentos/Git/IDJ/Trabalho_1/build /home/gabriel/Documentos/Git/IDJ/Trabalho_1/build /home/gabriel/Documentos/Git/IDJ/Trabalho_1/build/CMakeFiles/Trabalho_1.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/gabriel/Documentos/Git/IDJ/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gabriel/Documentos/Git/IDJ /home/gabriel/Documentos/Git/IDJ /home/gabriel/Documentos/Git/IDJ/build /home/gabriel/Documentos/Git/IDJ/build /home/gabriel/Documentos/Git/IDJ/build/CMakeFiles/Trabalho_1.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Trabalho_1.dir/depend
 

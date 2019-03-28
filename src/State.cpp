@@ -3,7 +3,6 @@
 State::State(/* args */)
 {
     quitRequested = false;
-    bg //instanciar depois
 }
 
 State::~State()
@@ -26,5 +25,5 @@ void State::Update(float dt)
 
 void State::Render()
 {
-    //Not done
+    bg.Render(0, 0);
 }

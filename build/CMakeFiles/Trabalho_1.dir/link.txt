@@ -1,1 +1,1 @@
-/usr/bin/c++      CMakeFiles/Trabalho_1.dir/main.cpp.o  -o Trabalho_1 -rdynamic 
+/usr/bin/c++      CMakeFiles/Trabalho_1.dir/main.cpp.o CMakeFiles/Trabalho_1.dir/Game.cpp.o  -o Trabalho_1 -rdynamic 

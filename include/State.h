@@ -5,16 +5,13 @@
 #include "Music.h"
 
 #include "SDL.h"
-#include <iostream>
-
-using namespace std;
 
 class State
 {
 private:
   /* data */
   Sprite bg;
-  Music music;
+  //Music music;
   bool quitRequested;
 
 public:
@@ -22,7 +19,7 @@ public:
   ~State();
   bool QuitRequested();
   void LoadAssets();
-  void Update(float);
+  void Update(float dt);
   void Render();
 };
 
