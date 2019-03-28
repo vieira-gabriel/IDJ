@@ -2,6 +2,7 @@
 #define GAME_H_INCLUDE
 
 #include "SDL.h"
+#include <State.h>
 #include <iostream>
 
 using namespace std;
