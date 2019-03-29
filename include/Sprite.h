@@ -5,10 +5,11 @@
 #define INCLUDE_SDL_MIXER
 #include <SDL_include.h>
 #include <iostream>
+#include <Component.h>
 
 using namespace std;
 
-class Sprite
+class Sprite : public Component
 {
 private:
   SDL_Texture *texture;
@@ -17,12 +18,12 @@ private:
   SDL_Rect clipRect;
 
 public:
-  Sprite();
-  Sprite(string file);
+  Sprite() : Component(GameObject &associated));
+  Sprite(string file) : Component(GameObject &associated));
   ~Sprite();
   void Open(string file);
   void SetClip(int x, int y, int w, int h);
-  void Render(int x, int y);
+  void Render();
   int GetWidth();
   int GetHeight();
   bool IsOpen();

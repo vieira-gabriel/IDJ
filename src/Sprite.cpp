@@ -7,11 +7,11 @@
 Uint32 *format = nullptr;
 int *access = nullptr;
 
-Sprite::Sprite()
+Sprite::Sprite() : Component(GameObject &associated))
 {
     texture = nullptr;
 }
-Sprite::Sprite(string file)
+Sprite::Sprite(string file) : Component(GameObject &associated))
 {
     texture = nullptr;
     Sprite::Open(file);
@@ -47,7 +47,7 @@ void Sprite::SetClip(int x, int y, int w, int h)
     clipRect.h = h;
 }
 
-void Sprite::Render(int x, int y)
+void Sprite::Render()
 {
     SDL_Rect dstRect = {x, y, clipRect.w, clipRect.h};
 
@@ -72,4 +72,12 @@ bool Sprite::IsOpen()
 {
     bool ret = (texture != nullptr) ? true : false;
     return ret;
+}
+
+virtual void Sprite::Update(float dt)
+{
+}
+
+virtual void Sprite::Is(string type)
+{
 }
