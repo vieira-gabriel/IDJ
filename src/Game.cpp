@@ -80,7 +80,7 @@ Game::~Game()
 Game &Game::GetInstance()
 {
     if (instance == nullptr)
-        instance = new Game("Penguin", 1024, 600);
+        instance = new Game("Gabriel Vieira de Arimatéa 150126956", 1024, 600);
 
     return *instance;
 }
