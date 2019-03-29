@@ -1,6 +1,7 @@
 #include <State.h>
 
 #define BACKGROUND_SPRITE "assets/img/ocean.jpg"
+#define BACKGROUND_MUSIC "assets/audio/stageState.ogg"
 
 State::State(/* args */)
 {
@@ -20,6 +21,7 @@ bool State::QuitRequested()
 void State::LoadAssets()
 {
     bg.Open(BACKGROUND_SPRITE);
+    music.Open(BACKGROUND_MUSIC);
 }
 
 void State::Update(float dt)

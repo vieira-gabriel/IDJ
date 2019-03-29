@@ -12,7 +12,7 @@ class State
 private:
   /* data */
   Sprite bg;
-  //Music music;
+  Music music;
   bool quitRequested;
 
 public:

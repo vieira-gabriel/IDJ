@@ -12,8 +12,6 @@ Game::Game(string title, int width, int height)
     {
         instance = this;
     }
-    else
-        ;
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) != 0)
     {
@@ -55,7 +53,7 @@ Game::Game(string title, int width, int height)
 
     std::cout << "Window created" << std::endl;
 
-    if (SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE) == nullptr)
+    if (SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED) == nullptr)
     {
         std::cout << "Unable to create Renderer: " << SDL_GetError() << std::endl;
         exit(1);
