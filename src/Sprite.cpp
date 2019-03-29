@@ -4,8 +4,8 @@
 #define X_DEFAULT 0
 #define Y_DEFAULT 0
 
-constant uint32 *format = nullptr;
-constant int *access = nullptr;
+Uint32 *format = nullptr;
+int *access = nullptr;
 
 Sprite::Sprite()
 {
@@ -28,7 +28,7 @@ void Sprite::Open(string file)
 
     if (Sprite::IsOpen())
         SDL_DestroyTexture(texture);
-    texture = IMG_LoadTexture(game.GetRender(), file.c_str());
+    texture = IMG_LoadTexture(game.GetRenderer(), file.c_str());
     if (texture == nullptr)
     {
         std::cout << "Fail to load texture" << SDL_GetError() << std::endl;

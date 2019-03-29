@@ -1,7 +1,9 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include <SDL.h>
+#define INCLUDE_SDL_IMAGE
+#define INCLUDE_SDL_MIXER
+#include <SDL_include.h>
 #include <iostream>
 
 using namespace std;

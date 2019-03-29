@@ -1,24 +1,26 @@
 #ifndef MUSIC_H
 #define MUSIC_H
 
-#include "SDL.h"
+#define INCLUDE_SDL_IMAGE
+#define INCLUDE_SDL_MIXER
+#include <SDL_include.h>
 #include <iostream>
 
 using namespace std;
 
 class Music
 {
-  private:
-    Mix_Music *music;
+private:
+  Mix_Music *music;
 
-  public:
-    Music();
-    Music(std::string);
-    ~Music();
-    void Play(int);
-    void Stop(int);
-    void Open(std::string);
-    bool IsOpen();
+public:
+  Music();
+  Music(string file);
+  ~Music();
+  void Play(int times);
+  void Stop(int msToStop);
+  void Open(string file);
+  bool IsOpen();
 };
 
 #endif MUSIC_H

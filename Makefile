@@ -4,7 +4,7 @@
 
 #O compilador
 COMPILER = g++
-# Comando para remover pasras
+# Comando para remover pastas
 RMDIR = rm -rdf
 #Comando para remover arquivos
 RM = rm -f
@@ -25,8 +25,8 @@ RFLAGS = -O3 -mtune=native
 
 INC_PATH = include
 SRC_PATH = src
-BIN_PATH = bin
-DEP_PATH = dep
+BIN_PATH = build/bin
+DEP_PATH = build/dep
 
 # Uma lista de arquivos por extensão:
 CPP_FILES = $(wildcard $(SRC_PATH)/*.cpp)
@@ -36,9 +36,9 @@ DEP_FILES	=	$(addprefix	$(DEP_PATH)/,$(addsufix	.d,$(FILE_NAMES)))
 OBJ_FILES	=	$(addprefix	$(BIN_PATH)/,$(notdir	$(CPP_FILES:.cpp=.o)))
 
 # Nome do executável
-EXEC = play
+EXEC = Game
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Caso o sistema seja vírus, quer dizer, windows
+# Caso o sistema seja Windows
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ifeq (($OS),Windows_NT)
 
@@ -66,7 +66,7 @@ else
 UNAME_S := $(shell uname -s)
 
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Caso o sistema seja caro, quer dizer, Mac
+# Caso o sistema seja Mac
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ifeq ($(UNAME_S), Darwin)

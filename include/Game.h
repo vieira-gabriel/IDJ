@@ -1,11 +1,12 @@
 #ifndef GAME_H_INCLUDE
 #define GAME_H_INCLUDE
 
-#include <SDL.h>
+#define INCLUDE_SDL_IMAGE
+#define INCLUDE_SDL_MIXER
 #include <SDL_include.h>
-#include <SDL_mixer.h>
 #include <State.h>
 #include <iostream>
+#include <string>
 
 using namespace std;
 

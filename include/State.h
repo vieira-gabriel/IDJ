@@ -1,10 +1,11 @@
 #ifndef STATE_H
 #define STATE_H
 
+#define INCLUDE_SDL_IMAGE
+#define INCLUDE_SDL_MIXER
 #include "Sprite.h"
 #include "Music.h"
-
-#include "SDL.h"
+#include <SDL_include.h>
 
 class State
 {
