@@ -19,7 +19,7 @@ Game::Game(string title, int width, int height)
         exit(1);
     }
 
-    std::cout << "SDL Inicialized" << std::endl;
+    std::cout << "SDL inicialized" << std::endl;
 
     if (Mix_Init(MIX_INIT_FLAC | MIX_INIT_OGG | MIX_INIT_MP3) == 0)
     {
@@ -27,7 +27,7 @@ Game::Game(string title, int width, int height)
         exit(1);
     }
 
-    std::cout << "Mix Inicialized" << std::endl;
+    std::cout << "Mix inicialized" << std::endl;
 
     if (IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG | IMG_INIT_TIF) == 0)
     {
@@ -35,7 +35,7 @@ Game::Game(string title, int width, int height)
         exit(1);
     }
 
-    std::cout << "IMG Inicialized" << std::endl;
+    std::cout << "IMG inicialized" << std::endl;
 
     Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, CHUNKSIZE);
 
@@ -45,7 +45,9 @@ Game::Game(string title, int width, int height)
 
     std::cout << "Channels Allocated" << std::endl;
 
-    if (SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, WINDOW_FLAG) == nullptr)
+    window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, WINDOW_FLAG);
+
+    if (window == nullptr)
     {
         std::cout << "Unable to create window: " << SDL_GetError() << std::endl;
         exit(1);
@@ -53,7 +55,9 @@ Game::Game(string title, int width, int height)
 
     std::cout << "Window created" << std::endl;
 
-    if (SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED) == nullptr)
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
+    if (renderer == nullptr)
     {
         std::cout << "Unable to create Renderer: " << SDL_GetError() << std::endl;
         exit(1);
@@ -64,7 +68,7 @@ Game::Game(string title, int width, int height)
 
 Game::~Game()
 {
-    delete state;
+    //delete state;
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     Mix_CloseAudio();
@@ -93,7 +97,11 @@ SDL_Renderer *Game::GetRenderer()
 
 void Game::Run()
 {
-    while (!state->QuitRequested())
+    std::cout << "Start running" << std::endl;
+
+    state = new State;
+
+    while (state->QuitRequested() != true)
     {
         state->Update(33);
         state->Render();

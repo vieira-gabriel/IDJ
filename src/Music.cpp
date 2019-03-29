@@ -7,6 +7,7 @@ Music::Music()
 
 Music::Music(string file)
 {
+    music = nullptr;
     Open(file);
 }
 
@@ -18,13 +19,17 @@ Music::~Music()
 
 void Music::Play(int times = -1)
 {
-    if (IsOpen())
-        Mix_PlayMusic(music, times);
-
+    if (music != nullptr)
+    {
+        if (Mix_PlayMusic(music, times) == -1)
+        {
+            std::cout << "Error playing music: " << SDL_GetError() << std::endl;
+            exit(1);
+        }
+    }
     else
     {
-        std::cout << "Error playing music" << std::endl;
-        exit(1);
+        std::cout << "No music loaded" << std::endl;
     }
 }
 
@@ -35,7 +40,8 @@ void Music::Stop(int msToStop = 1500)
 
 void Music::Open(string file)
 {
-    if (Mix_LoadMUS(file.c_str()) == nullptr)
+    music = Mix_LoadMUS(file.c_str());
+    if (music == nullptr)
     {
         std::cout << "Error opening music" << std::endl;
         exit(1);

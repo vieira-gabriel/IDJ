@@ -24,4 +24,4 @@ public:
   void Render();
 };
 
-#endif STATE_H
+#endif

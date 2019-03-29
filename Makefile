@@ -17,7 +17,7 @@ LIBS = -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lm
 INC_PATHS = -I$(INC_PATH) $(addprefix -I,$(SDL_INC_PATHS))
 
 #Diretivas de compilação
-FLAGS = -std=c++11 -Wall -pedantic -Wextra -Wno-unused-parameter -Werror=init-self
+FLAGS = -std=c++11 -Wall -g -pedantic -Wextra -Wno-unused-parameter -Werror=init-self
 #Diretivas extras para debug
 DFLAGS = -ggdb -O0 -DDEBUG
 #Diretivas extras para release
@@ -84,7 +84,7 @@ all:	$(EXEC)
 
 #Gera o executável
 $(EXEC):	$(OBJ_FILES)
-	$(COMPILER) -o $@ $^ $(LINK_PATH) $(LIBS) $(FLAGS)
+	$(COMPILER)  -o $@ $^ $(LINK_PATH) $(LIBS) $(FLAGS)
 
 #Gera os arquivos objetos
 $(BIN_PATH)/%.o:	$(DEP_PATH)/%.d	|	folders

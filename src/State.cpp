@@ -3,10 +3,11 @@
 #define BACKGROUND_SPRITE "assets/img/ocean.jpg"
 #define BACKGROUND_MUSIC "assets/audio/stageState.ogg"
 
-State::State(/* args */)
+State::State() : bg(BACKGROUND_SPRITE), music(BACKGROUND_MUSIC)
 {
     quitRequested = false;
-    LoadAssets();
+    //LoadAssets();
+    music.Play(-1);
 }
 
 State::~State()
@@ -26,7 +27,8 @@ void State::LoadAssets()
 
 void State::Update(float dt)
 {
-    quitRequested = SDL_QuitRequested() == true ? true : false;
+    quitRequested = (SDL_QuitRequested() == true) ? true : false;
+
     SDL_Delay(dt);
 }
 

@@ -23,4 +23,4 @@ public:
   bool IsOpen();
 };
 
-#endif MUSIC_H
+#endif
