@@ -5,15 +5,27 @@
 #define INCLUDE_SDL_MIXER
 #include "Sprite.h"
 #include "Music.h"
+#include "Sound.h"
+#include "Vec2.h"
+#include "Rect.h"
+#include "Face.h"
 #include <SDL_include.h>
+#include <string>
+#include <vector>
+#include <memory>
+#include <utility>
 
 class State
 {
 private:
   /* data */
-  Sprite bg;
+  GameObject bg;
   Music music;
   bool quitRequested;
+
+  void Input();
+  void AddObject(int mouseX, int mouseY);
+  std::vector<std::unique_ptr<GameObject>> objectArray;
 
 public:
   State();

@@ -1,6 +1,6 @@
 #include "Component.h"
 
-Component::Component(GameObject &associated)
+Component::Component(GameObject &associated) : associated(associated)
 {
 }
 
@@ -8,14 +8,17 @@ Component::~Component()
 {
 }
 
-virtual void Component::Update(float dt)
+void Component::Update(float dt)
 {
 }
 
-virtual void Component::Render()
+void Component::Render()
 {
 }
 
-virtual bool Component::Is(string type)
+bool Component::Is(string type)
 {
+    // Return true if the type wanted is Component
+    bool ret = (type == "Component") ? true : false;
+    return ret;
 }

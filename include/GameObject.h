@@ -5,28 +5,30 @@
 #include <vector>
 #include <Rect.h>
 #include <iostream>
+#include <memory>
 
 using namespace std;
+class Component;
 
 class GameObject
 {
-  private:
-    std::vector<Component *> components;
-    bool isDead;
+private:
+  vector<shared_ptr<Component>> components;
+  bool isDead;
 
-  public:
-    Rect box;
+public:
+  Rect box;
 
-    GameObject();
-    ~GameObject();
+  GameObject();
+  ~GameObject();
 
-    void Update(float dt);
-    void Render();
-    bool IsDead();
-    void RequestDelete();
-    void AddComponent(Component *cpt);
-    void RemoveComponent(Component *cpt);
-    Component *GetComponent(string type);
+  void Update(float dt);
+  void Render();
+  bool IsDead();
+  void RequestDelete();
+  void AddComponent(Component *cpt);
+  void RemoveComponent(Component *cpt);
+  Component *GetComponent(string type);
 };
 
 #endif

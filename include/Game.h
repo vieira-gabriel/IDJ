@@ -7,6 +7,9 @@
 #include <State.h>
 #include <iostream>
 #include <string>
+#include <cstdlib>
+#include <ctime>
+#include <memory>
 
 using namespace std;
 

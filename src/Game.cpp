@@ -8,6 +8,7 @@ Game *Game::instance = nullptr;
 
 Game::Game(string title, int width, int height)
 {
+    srand(time(NULL));
     if (instance != nullptr)
     {
         instance = this;
@@ -19,7 +20,7 @@ Game::Game(string title, int width, int height)
         exit(1);
     }
 
-    std::cout << "SDL inicialized" << std::endl;
+    std::cout << "SDL initialized" << std::endl;
 
     if (Mix_Init(MIX_INIT_FLAC | MIX_INIT_OGG | MIX_INIT_MP3) == 0)
     {
@@ -27,7 +28,7 @@ Game::Game(string title, int width, int height)
         exit(1);
     }
 
-    std::cout << "Mix inicialized" << std::endl;
+    std::cout << "Mix initialized" << std::endl;
 
     if (IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG | IMG_INIT_TIF) == 0)
     {
@@ -35,7 +36,7 @@ Game::Game(string title, int width, int height)
         exit(1);
     }
 
-    std::cout << "IMG inicialized" << std::endl;
+    std::cout << "IMG initialized" << std::endl;
 
     Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, CHUNKSIZE);
 
