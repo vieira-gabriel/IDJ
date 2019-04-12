@@ -4,7 +4,7 @@
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include <SDL_include.h>
-#include <State.h>
+#include "State.h"
 #include <iostream>
 #include <string>
 #include <cstdlib>
@@ -12,6 +12,8 @@
 #include <memory>
 
 using namespace std;
+
+class State;
 
 class Game
 {

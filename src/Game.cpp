@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Resources.h"
 
 #define CHUNKSIZE 1024
 #define WINDOW_FLAG 0
@@ -109,4 +110,5 @@ void Game::Run()
 
         SDL_RenderPresent(Game::GetInstance().GetRenderer());
     }
+    Resources::ClearImages();
 }

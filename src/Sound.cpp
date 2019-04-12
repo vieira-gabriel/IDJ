@@ -1,4 +1,5 @@
 #include "Sound.h"
+#include "Resources.h"
 
 Sound::Sound(GameObject &associated) : Component(associated) // Construct Component with the same associated that the Sound constructor receives
 {
@@ -33,12 +34,7 @@ void Sound::Stop()
 }
 void Sound::Open(string file)
 {
-    chunk = Mix_LoadWAV(file.c_str());
-    if (chunk == nullptr)
-    {
-        std::cout << "Unable to load WAV: " << SDL_GetError() << std::endl;
-        exit(1);
-    }
+    chunk = Resources::GetSound(file); // Mix_LoadWAV(file.c_str());
 }
 bool Sound::IsOpen()
 {

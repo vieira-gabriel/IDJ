@@ -4,15 +4,19 @@
 #define BACKGROUND_MUSIC "assets/audio/stageState.ogg"
 #define PENGUIN_SOURCE "assets/img/penguinface.png"
 #define PENGUIN_SOUND "assets/audio/boom.wav"
+#define TILE_MAP_SOURCE "assets/map/tileMap.txt"
+#define TILE_SET_SOURCE "assets/img/tileset.png"
+#define TILE_WIDTH 64
+#define TILE_HEIGHT 64
 #define PI 3.14159265
 
 std::vector<std::unique_ptr<GameObject>>::iterator it;
 
 State::State() : music(BACKGROUND_MUSIC)
 {
+    // Create and initialize Background
     Sprite *newSprite = new Sprite(bg, BACKGROUND_SPRITE);
     quitRequested = false;
-    //LoadAssets();
     music.Play(-1);
 
     bg.AddComponent(newSprite);
@@ -21,9 +25,21 @@ State::State() : music(BACKGROUND_MUSIC)
     bg.box.y = 0;
     bg.box.w = newSprite->GetWidth();
     bg.box.h = newSprite->GetHeight();
-    //compensar o tamanho da sprite
 
     objectArray.emplace_back(std::move(&bg));
+
+    // Crate and initialize TileMap
+    shared_ptr<GameObject> GOMap = shared_ptr<GameObject>(new GameObject());
+
+    GOMap->box.x = 0;
+    GOMap->box.y = 0;
+
+    TileSet *tSet = new TileSet(TILE_WIDTH, TILE_HEIGHT, TILE_SET_SOURCE);
+    TileMap *tMap = new TileMap(*GOMap, TILE_MAP_SOURCE, tSet);
+
+    GOMap->AddComponent(tMap);
+
+    objectArray.emplace_back(std::move(GOMap));
 }
 
 State::~State()

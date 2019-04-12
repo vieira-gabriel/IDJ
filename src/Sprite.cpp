@@ -1,5 +1,6 @@
 #include <Sprite.h>
 #include <Game.h>
+#include "Resources.h"
 
 #define X_DEFAULT 0
 #define Y_DEFAULT 0
@@ -19,19 +20,19 @@ Sprite::Sprite(GameObject &associated, string file) : Component(associated)
 
 Sprite::~Sprite()
 {
-    SDL_DestroyTexture(texture);
+    // Resource treats the texture destruction SDL_DestroyTexture(texture);
 }
 
 void Sprite::Open(string file)
 {
     Game &game = Game::GetInstance();
 
-    if (Sprite::IsOpen())
-        SDL_DestroyTexture(texture);
+    // if (Sprite::IsOpen())
+    //     Resource treats the texture destruction SDL_DestroyTexture(texture);
 
     cout << "File: " << file << endl;
 
-    texture = IMG_LoadTexture(game.GetRenderer(), file.c_str());
+    texture = Resources::GetImage(file.c_str()); //IMG_LoadTexture(game.GetRenderer(), file.c_str());
     if (texture == nullptr)
     {
         std::cout << "Fail to load texture " << SDL_GetError() << std::endl;

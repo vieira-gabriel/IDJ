@@ -9,6 +9,7 @@
 #include "Vec2.h"
 #include "Rect.h"
 #include "Face.h"
+#include "TileMap.h"
 #include <SDL_include.h>
 #include <string>
 #include <vector>
@@ -25,7 +26,7 @@ private:
 
   void Input();
   void AddObject(int mouseX, int mouseY);
-  std::vector<std::unique_ptr<GameObject>> objectArray;
+  std::vector<std::shared_ptr<GameObject>> objectArray;
 
 public:
   State();
