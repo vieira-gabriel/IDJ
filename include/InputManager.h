@@ -16,7 +16,7 @@ class InputManager
 private:
     bool mouseState[6];
     int mouseUpdate[6];
-    
+
     unordered_map<int, bool> keyState;
     unordered_map<int, bool> keyUpdate;
 
