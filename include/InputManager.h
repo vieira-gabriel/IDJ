@@ -8,6 +8,9 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <Vec2.h>
+#include <GameObject.h>
+#include <Face.h>
 
 using namespace std;
 
