@@ -27,7 +27,15 @@ void Face::Damage(int damage)
 }
 void Face::Update(float dt)
 {
+    InputManager &IM = InputManager::GetInstance();
+
+    if (IM.IsMouseDown(SDL_MOUSEBUTTONDOWN))
+    {
+        if (associated.box.Contains(IM.GetMourseX(), IM.GetMourseY()))
+            Damage(std::rand() % 10 + 10);
+    }
 }
+
 void Face::Render()
 {
 }

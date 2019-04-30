@@ -79,7 +79,7 @@ bool InputManager::KeyRelease(int key)
 
 bool InputManager::IsKeyDown(int key)
 {
-    return keyState[key];
+    return keyState[key] ? true : false;
 }
 
 bool InputManager::MousePress(int button)
@@ -94,7 +94,7 @@ bool InputManager::MouseRelease(int button)
 
 bool InputManager::IsMouseDown(int button)
 {
-    return mouseState[button];
+    return mouseState[button] ? true : false;
 }
 
 int InputManager::GetMourseX()

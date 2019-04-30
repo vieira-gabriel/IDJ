@@ -102,9 +102,11 @@ void Game::Run()
     std::cout << "Start running" << std::endl;
 
     state = new State;
+    InputManager &IM = InputManager::GetInstance();
 
     while (state->QuitRequested() != true)
     {
+        IM.Update();
         state->Update(33);
         state->Render();
 

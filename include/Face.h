@@ -4,6 +4,7 @@
 #include "Component.h"
 #include "GameObject.h"
 #include "Sound.h"
+#include "InputManager.h"
 #include <iostream>
 #include <string>
 

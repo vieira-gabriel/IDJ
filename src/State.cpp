@@ -58,7 +58,17 @@ void State::LoadAssets()
 
 void State::Update(float dt)
 {
-    Input();
+    InputManager &IM = InputManager::GetInstance();
+
+    if (IM.QuitRequested() || IM.KeyPress(ESCAPE_KEY))
+        quitRequested = true;
+
+    if (IM.KeyPress(SPACE_KEY))
+    {
+        Vec2 objPos = Vec2(200, 0).GetRotated(-PI + PI * (rand() % 1001) / 500.0) + Vec2(IM.GetMourseX(), IM.GetMourseY());
+        AddObject((int)objPos.x, (int)objPos.y);
+    }
+
     for (auto i = 0; i < objectArray.size(); i++)
     {
         objectArray[i]->Update(dt);

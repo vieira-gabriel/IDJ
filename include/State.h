@@ -10,6 +10,7 @@
 #include "Rect.h"
 #include "Face.h"
 #include "TileMap.h"
+#include "InputManager.h"
 #include <SDL_include.h>
 #include <string>
 #include <vector>
