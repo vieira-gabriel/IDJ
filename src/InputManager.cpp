@@ -9,8 +9,11 @@
 
 InputManager::InputManager()
 {
-    mouseState[6] = {};
-    mouseUpdate[6] = {};
+    for (int i = 0; i < 6; i++)
+    {
+        mouseState[i] = false;
+        mouseUpdate[i] = 0;
+    }
 }
 
 InputManager::~InputManager()
@@ -79,7 +82,7 @@ bool InputManager::KeyRelease(int key)
 
 bool InputManager::IsKeyDown(int key)
 {
-    return keyState[key] ? true : false;
+    return keyState[key];
 }
 
 bool InputManager::MousePress(int button)
@@ -94,7 +97,7 @@ bool InputManager::MouseRelease(int button)
 
 bool InputManager::IsMouseDown(int button)
 {
-    return mouseState[button] ? true : false;
+    return mouseState[button];
 }
 
 int InputManager::GetMourseX()

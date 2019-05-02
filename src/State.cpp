@@ -67,6 +67,7 @@ void State::Update(float dt)
     {
         Vec2 objPos = Vec2(200, 0).GetRotated(-PI + PI * (rand() % 1001) / 500.0) + Vec2(IM.GetMourseX(), IM.GetMourseY());
         AddObject((int)objPos.x, (int)objPos.y);
+        //cout << "X = " << (int)objPos.x << " Y = " << (int)objPos.y << endl;
     }
 
     for (auto i = 0; i < objectArray.size(); i++)
