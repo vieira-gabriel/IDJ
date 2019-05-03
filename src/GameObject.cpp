@@ -51,6 +51,7 @@ void GameObject::AddComponent(Component *cpt)
     // If the new component is not a null pointer, it'll be added in the vector
     if (cpt != nullptr)
         components.emplace_back(cpt); // unique_ptr cant copy, so this move the element to the vector
+    Start();
 }
 
 void GameObject::RemoveComponent(Component *cpt)
