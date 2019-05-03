@@ -23,7 +23,7 @@ void Camera::Update(float dt)
     if (focus != nullptr) // If focus exist, centralize it
     {
         pos.x = focus->box.x + (focus->box.w - SCR_WIDTH) / 2;
-        pos.y = focus->box.y + (focus->box.h - SCR_HIGHT) / 2;
+        pos.y = focus->box.y + (focus->box.h - SCR_HEIGHT) / 2;
     }
     else
     {
@@ -38,7 +38,5 @@ void Camera::Update(float dt)
 
         pos.x += speed.x * dt;
         pos.y += speed.y * dt;
-        cout << "vel x: " << speed.x << endl
-             << "vel y: " << speed.y << endl;
     }
 }

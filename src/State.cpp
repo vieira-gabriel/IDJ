@@ -36,7 +36,7 @@ State::State() : music(BACKGROUND_MUSIC)
     GOMap->box.y = 0;
 
     TileSet *tSet = new TileSet(TILE_WIDTH, TILE_HEIGHT, TILE_SET_SOURCE);
-    TileMap *tMap = new TileMap(*GOMap, TILE_MAP_SOURCE, tSet, 0);
+    TileMap *tMap = new TileMap(*GOMap, TILE_MAP_SOURCE, tSet, 2);
 
     GOMap->AddComponent(tMap);
 
