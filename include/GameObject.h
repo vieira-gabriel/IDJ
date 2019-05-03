@@ -15,6 +15,7 @@ class GameObject
 private:
   vector<shared_ptr<Component>> components;
   bool isDead;
+  bool started;
 
 public:
   Rect box;
@@ -29,6 +30,7 @@ public:
   void AddComponent(Component *cpt);
   void RemoveComponent(Component *cpt);
   Component *GetComponent(string type);
+  void Start();
 };
 
 #endif

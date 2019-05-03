@@ -76,3 +76,14 @@ Component *GameObject::GetComponent(string type)
         }
     }
 }
+
+void GameObject::Start()
+{
+    started = false;
+    for (int i = 0; i < components.size(); i++)
+    {
+        components[i]->Start();
+        components[i]->started = true;
+    }
+    started = true;
+}

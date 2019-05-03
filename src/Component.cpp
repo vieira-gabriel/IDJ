@@ -22,3 +22,7 @@ bool Component::Is(string type)
     bool ret = (type == "Component") ? true : false;
     return ret;
 }
+
+void Component::Start()
+{
+}
