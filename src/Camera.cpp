@@ -36,7 +36,6 @@ void Camera::Update(float dt)
         if (IM.IsKeyDown(UP_ARROW_KEY))
             speed.y = DEFAULT_SPEED;
 
-        cout << dt << endl;
         pos.x += speed.x * dt;
         pos.y += speed.y * dt;
     }
