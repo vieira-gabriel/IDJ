@@ -6,8 +6,8 @@
 #include "InputManager.h"
 
 #define SCR_WIDTH 1024
-#define SCR_HIGHT 600
-#define DEFAULT_SPEED 2
+#define SCR_HEIGHT 600
+#define DEFAULT_SPEED 300
 
 using namespace std;
 

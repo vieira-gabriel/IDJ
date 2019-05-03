@@ -108,7 +108,7 @@ void Game::Run()
     {
         CalculateDeltaTime();
         IM.Update();
-        state->Update(33);
+        state->Update(dt);
         state->Render();
 
         SDL_RenderPresent(Game::GetInstance().GetRenderer());
