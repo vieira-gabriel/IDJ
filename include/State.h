@@ -25,10 +25,10 @@ private:
   shared_ptr<GameObject> bg;
   Music music;
   bool quitRequested;
+  bool started;
+  vector<shared_ptr<GameObject>> objectArray;
 
-  void Input();
-  void AddObject(int mouseX, int mouseY);
-  std::vector<std::shared_ptr<GameObject>> objectArray;
+  // void Input();
 
 public:
   State();
@@ -37,6 +37,9 @@ public:
   void LoadAssets();
   void Update(float dt);
   void Render();
+  void Start();
+  weak_ptr<GameObject> AddObject(GameObject *go);
+  weak_ptr<GameObject> GetObjectPtr(GameObject *go);
 };
 
 #endif
