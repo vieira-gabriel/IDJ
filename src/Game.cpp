@@ -106,6 +106,7 @@ void Game::Run()
 
     while (state->QuitRequested() != true)
     {
+        CalculateDeltaTime();
         IM.Update();
         state->Update(33);
         state->Render();
@@ -113,4 +114,15 @@ void Game::Run()
         SDL_RenderPresent(Game::GetInstance().GetRenderer());
     }
     Resources::ClearImages();
+}
+
+void Game::CalculateDeltaTime()
+{
+    dt = ((float)SDL_GetTicks() - (float)frameStart) / 1000;
+    frameStart = SDL_GetTicks(); // Update frameStart
+}
+
+float Game::GetDeltaTime()
+{
+    return dt;
 }

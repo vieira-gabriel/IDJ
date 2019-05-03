@@ -30,8 +30,7 @@ void Face::Update(float dt)
     InputManager &IM = InputManager::GetInstance();
     if (IM.MousePress(LEFT_MOUSE_BUTTON))
     {
-        cout << "I'll destroy you!" << endl;
-        if (associated.box.Contains(IM.GetMourseX(), IM.GetMourseY()))
+        if (associated.box.Contains(IM.GetMourseX() - Camera::pos.x, IM.GetMourseY() - Camera::pos.y))
             Damage(std::rand() % 10 + 10);
     }
 }

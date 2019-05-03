@@ -15,18 +15,19 @@ std::vector<std::unique_ptr<GameObject>>::iterator it;
 State::State() : music(BACKGROUND_MUSIC)
 {
     // Create and initialize Background
-    Sprite *newSprite = new Sprite(bg, BACKGROUND_SPRITE);
-    quitRequested = false;
-    music.Play(-1);
+    bg = shared_ptr<GameObject>(new GameObject());
+    Sprite *newSprite = new Sprite(*bg, BACKGROUND_SPRITE);
+    CameraFollower *follow = new CameraFollower(*bg);
 
-    bg.AddComponent(newSprite);
+    bg->box.x = 0;
+    bg->box.y = 0;
+    bg->box.w = newSprite->GetWidth();
+    bg->box.h = newSprite->GetHeight();
 
-    bg.box.x = 0;
-    bg.box.y = 0;
-    bg.box.w = newSprite->GetWidth();
-    bg.box.h = newSprite->GetHeight();
+    bg->AddComponent(newSprite);
+    bg->AddComponent(follow);
 
-    objectArray.emplace_back(std::move(&bg));
+    objectArray.emplace_back(std::move(bg));
 
     // Crate and initialize TileMap
     shared_ptr<GameObject> GOMap = shared_ptr<GameObject>(new GameObject());
@@ -35,11 +36,14 @@ State::State() : music(BACKGROUND_MUSIC)
     GOMap->box.y = 0;
 
     TileSet *tSet = new TileSet(TILE_WIDTH, TILE_HEIGHT, TILE_SET_SOURCE);
-    TileMap *tMap = new TileMap(*GOMap, TILE_MAP_SOURCE, tSet);
+    TileMap *tMap = new TileMap(*GOMap, TILE_MAP_SOURCE, tSet, 0);
 
     GOMap->AddComponent(tMap);
 
     objectArray.emplace_back(std::move(GOMap));
+
+    quitRequested = false;
+    music.Play(-1);
 }
 
 State::~State()
@@ -59,6 +63,7 @@ void State::LoadAssets()
 void State::Update(float dt)
 {
     InputManager &IM = InputManager::GetInstance();
+    Camera::Update(dt);
 
     if (IM.QuitRequested() || IM.KeyPress(ESCAPE_KEY))
         quitRequested = true;
@@ -84,7 +89,6 @@ void State::Update(float dt)
 void State::Render()
 {
 
-    bg.GetComponent("Sprite")->Render();
     for (auto i = 0; i < objectArray.size(); i++)
         objectArray[i]->Render();
 }
@@ -160,8 +164,8 @@ void State::AddObject(int mouseX, int mouseY)
     Face *enemyFace = new Face(*enemy);
     Sound *enemySound = new Sound(*enemy, PENGUIN_SOUND);
 
-    enemy->box.x = mouseX;
-    enemy->box.y = mouseY;
+    enemy->box.x = mouseX - Camera::pos.x;
+    enemy->box.y = mouseY - Camera::pos.y;
     enemy->box.w = theEnemy->GetWidth();
     enemy->box.h = theEnemy->GetHeight();
     //compensar o tamanho da sprite

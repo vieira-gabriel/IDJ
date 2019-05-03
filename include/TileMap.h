@@ -19,9 +19,10 @@ private:
   int mapWidth;
   int mapHeight;
   int mapDepth;
+  float parallax;
 
 public:
-  TileMap(GameObject &associated, string file, TileSet *tileSet);
+  TileMap(GameObject &associated, string file, TileSet *tileSet, float parallax);
 
   void Load(string file);
   void SetTileSet(TileSet *tileSet);

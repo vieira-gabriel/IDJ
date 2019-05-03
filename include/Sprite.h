@@ -6,6 +6,7 @@
 #include <SDL_include.h>
 #include <iostream>
 #include <Component.h>
+#include "Camera.h"
 
 using namespace std;
 

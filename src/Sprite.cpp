@@ -30,7 +30,7 @@ void Sprite::Open(string file)
     // if (Sprite::IsOpen())
     //     Resource treats the texture destruction SDL_DestroyTexture(texture);
 
-    cout << "File: " << file << endl;
+    //cout << "File: " << file << endl;
 
     texture = Resources::GetImage(file.c_str()); //IMG_LoadTexture(game.GetRenderer(), file.c_str());
     if (texture == nullptr)
@@ -53,18 +53,7 @@ void Sprite::SetClip(int x, int y, int w, int h)
 
 void Sprite::Render()
 {
-    Game &instance = Game::GetInstance();
-    SDL_Rect dstRect;
-    dstRect.x = associated.box.x;
-    dstRect.y = associated.box.y;
-    dstRect.w = clipRect.w;
-    dstRect.h = clipRect.h;
-
-    if (SDL_RenderCopy(instance.GetRenderer(), texture, &clipRect, &dstRect) != 0)
-    {
-        std::cout << "Fail to render the texture: " << SDL_GetError() << std::endl;
-        exit(1);
-    }
+    Render(associated.box.x + Camera::pos.x, associated.box.y + Camera::pos.y);
 }
 
 void Sprite::Render(int x, int y)

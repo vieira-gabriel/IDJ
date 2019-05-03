@@ -1,6 +1,6 @@
 #include "TileMap.h"
 
-TileMap::TileMap(GameObject &associated, string file, TileSet *tileSet) : Component(associated)
+TileMap::TileMap(GameObject &associated, string file, TileSet *tileSet, float parallax = 0) : Component(associated), parallax(parallax)
 {
     Load(file);
     SetTileSet(tileSet);
@@ -73,7 +73,7 @@ int &TileMap::At(int x, int y, int z = 0)
 void TileMap::Render()
 {
     for (int i = 0; i < mapDepth; i++)
-        RenderLayer(i, this->associated.box.x, this->associated.box.y);
+        RenderLayer(i, Camera::pos.x * (1 + parallax * i), Camera::pos.y * (1 + parallax * i));
 }
 
 void TileMap::RenderLayer(int layer, int cameraX = 0, int cameraY = 0)

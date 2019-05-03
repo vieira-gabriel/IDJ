@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "Sound.h"
 #include "InputManager.h"
+#include "Camera.h"
 #include <iostream>
 #include <string>
 

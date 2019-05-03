@@ -11,6 +11,8 @@
 #include "Face.h"
 #include "TileMap.h"
 #include "InputManager.h"
+#include "Camera.h"
+#include "CameraFollower.h"
 #include <SDL_include.h>
 #include <string>
 #include <vector>
@@ -20,8 +22,7 @@
 class State
 {
 private:
-  /* data */
-  GameObject bg;
+  shared_ptr<GameObject> bg;
   Music music;
   bool quitRequested;
 
