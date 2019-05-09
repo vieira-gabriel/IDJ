@@ -8,7 +8,6 @@
 #define TILE_SET_SOURCE "assets/img/tileset.png"
 #define TILE_WIDTH 64
 #define TILE_HEIGHT 64
-#define PI 3.14159265
 
 std::vector<std::unique_ptr<GameObject>>::iterator it;
 
@@ -29,7 +28,7 @@ State::State() : music(BACKGROUND_MUSIC)
 
     objectArray.emplace_back(std::move(bg));
 
-    // Crate and initialize TileMap
+    // Create and initialize TileMap
     shared_ptr<GameObject> GOMap = shared_ptr<GameObject>(new GameObject());
 
     GOMap->box.x = 0;
@@ -44,6 +43,18 @@ State::State() : music(BACKGROUND_MUSIC)
 
     quitRequested = false;
     music.Play(-1);
+
+    // Create and initialize Alien
+    GameObject *alien_GO = new GameObject();
+    weak_ptr<GameObject> weak_alien = AddObject(alien_GO);
+    shared_ptr<GameObject> alien = weak_alien.lock();
+
+    alien->box.x = 512;
+    alien->box.y = 300;
+
+    Alien *theAlien = new Alien(*alien, 0);
+
+    alien->AddComponent(theAlien);
 }
 
 State::~State()
@@ -70,8 +81,8 @@ void State::Update(float dt)
 
     if (IM.KeyPress(SPACE_KEY))
     {
-        Vec2 objPos = Vec2(200, 0).GetRotated(-PI + PI * (rand() % 1001) / 500.0) + Vec2(IM.GetMourseX(), IM.GetMourseY());
-        AddObject((int)objPos.x, (int)objPos.y);
+        Vec2 pos = Vec2(200, 0).GetRotated(-PI + PI * (rand() % 1001) / 500.0) + Vec2(IM.GetMouseX(), IM.GetMouseY());
+        // AddObject((int)objPos.x, (int)objPos.y);
         //cout << "X = " << (int)objPos.x << " Y = " << (int)objPos.y << endl;
     }
 
@@ -160,21 +171,11 @@ weak_ptr<GameObject> State::AddObject(GameObject *go)
 {
     shared_ptr<GameObject> enemy(go);
 
-    Sprite *theEnemy = new Sprite(*enemy, PENGUIN_SOURCE);
-    Face *enemyFace = new Face(*enemy);
-    Sound *enemySound = new Sound(*enemy, PENGUIN_SOUND);
-
-    enemy->AddComponent(enemySound);
-
-    enemy->AddComponent(theEnemy);
-
-    enemy->AddComponent(enemyFace);
-
     objectArray.push_back(std::move(enemy));
     if (started)
-        enemy->Start();
+        objectArray.front()->Start();
 
-    return (weak_ptr<GameObject>)enemy;
+    return (weak_ptr<GameObject>)objectArray.back();
 }
 
 void State::Start()

@@ -95,6 +95,5 @@ void Sprite::Update(float dt)
 bool Sprite::Is(string type)
 {
     // Return true if the type wanted is Sprite
-    bool ret = (type == "Sprite") ? true : false;
-    return ret;
+    return (type == "Sprite");
 }

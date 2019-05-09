@@ -113,6 +113,7 @@ void Game::Run()
         state->Render();
 
         SDL_RenderPresent(Game::GetInstance().GetRenderer());
+        SDL_Delay(33);
     }
     Resources::ClearImages();
 }

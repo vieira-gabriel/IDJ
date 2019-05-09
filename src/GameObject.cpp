@@ -4,6 +4,8 @@ GameObject::GameObject()
 {
     //Atribute false to isDead
     isDead = false;
+    started = false;
+    components.clear();
 }
 
 GameObject::~GameObject()
@@ -80,11 +82,13 @@ Component *GameObject::GetComponent(string type)
 
 void GameObject::Start()
 {
-    started = false;
-    for (int i = 0; i < components.size(); i++)
+    if (!started)
     {
-        components[i]->Start();
-        components[i]->started = true;
+        for (int i = 0; i < components.size(); i++)
+        {
+            components[i]->Start();
+            components[i]->started = true;
+        }
+        started = true;
     }
-    started = true;
 }

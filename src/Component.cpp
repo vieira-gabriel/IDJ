@@ -19,8 +19,7 @@ void Component::Render()
 bool Component::Is(string type)
 {
     // Return true if the type wanted is Component
-    bool ret = (type == "Component") ? true : false;
-    return ret;
+    return (type == "Component");
 }
 
 void Component::Start()

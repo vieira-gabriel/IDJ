@@ -17,6 +17,5 @@ void CameraFollower::Render()
 bool CameraFollower::Is(string type)
 {
     // Return true if the type wanted is CameraFollower
-    bool ret = (type == "CameraFollower") ? true : false;
-    return ret;
+    return (type == "CameraFollower");
 }

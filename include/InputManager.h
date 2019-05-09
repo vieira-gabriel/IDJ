@@ -12,6 +12,7 @@
 #define DOWN_ARROW_KEY SDLK_DOWN
 #define ESCAPE_KEY SDLK_ESCAPE
 #define LEFT_MOUSE_BUTTON SDL_BUTTON_LEFT
+#define RIGHT_MOUSE_BUTTON SDL_BUTTON_RIGHT
 #define SPACE_KEY SDLK_SPACE
 
 using namespace std;
@@ -46,8 +47,8 @@ public:
     bool MouseRelease(int button);
     bool IsMouseDown(int button);
 
-    int GetMourseX();
-    int GetMourseY();
+    int GetMouseX();
+    int GetMouseY();
 
     bool QuitRequested();
 

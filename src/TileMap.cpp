@@ -111,6 +111,5 @@ void TileMap::Update(float dt)
 bool TileMap::Is(string type)
 {
     // Return true if the type wanted is TileMap
-    bool ret = (type == "TileMap") ? true : false;
-    return ret;
+    return (type == "TileMap");
 }

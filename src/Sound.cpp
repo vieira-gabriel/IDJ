@@ -50,6 +50,5 @@ void Sound::Render()
 bool Sound::Is(string type)
 {
     // Return true if the type wanted is Sound
-    bool ret = (type == "Sound") ? true : false;
-    return ret;
+    return (type == "Sound");
 }

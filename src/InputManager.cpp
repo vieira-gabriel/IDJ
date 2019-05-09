@@ -100,12 +100,12 @@ bool InputManager::IsMouseDown(int button)
     return mouseState[button];
 }
 
-int InputManager::GetMourseX()
+int InputManager::GetMouseX()
 {
     return mouseX;
 }
 
-int InputManager::GetMourseY()
+int InputManager::GetMouseY()
 {
     return mouseY;
 }
