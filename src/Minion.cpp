@@ -2,27 +2,29 @@
 
 #define MINION_SOURCE "assets/img/minion.png"
 
-Minion::Minion(GameObject &associated, weak_ptr<GameObject> alienCenter, float arcOffsetDeg) : Component(associated), alienCenter(*new GameObject())
+Minion::Minion(GameObject &associated, weak_ptr<GameObject> alienCenter, float arcOffsetDeg) : Component(associated)
 {
     Sprite *minion = new Sprite(associated, MINION_SOURCE);
 
     associated.AddComponent(minion);
 
     arc = arcOffsetDeg * (PI / 180);
+
+    this->alienCenter = alienCenter;
     shared_ptr<GameObject> shared_alienCenter = alienCenter.lock();
-    this->alienCenter = *shared_alienCenter;
 
-    // Vec2 distance(200, 0);
+    Vec2 distance = Vec2(200, 0);
 
-    if (shared_alienCenter != nullptr)
+    if (shared_alienCenter != nullptr) // If Alien is not dead
     {
-        // distance.GetRotated(arc);
+        distance.GetRotated(arc); // Rotates minion around the Alien
 
-        // distance += shared_alienCenter->box.CenterPoint();
-        // distance.x -= associated.box.w / 2;
-        // distance.y -= associated.box.h / 2;
+        distance += shared_alienCenter->box.CenterPoint(); // Sets distance to move
+        distance.x -= associated.box.w / 2;
+        distance.y -= associated.box.h / 2;
 
-        // associated.box += distance;
+        associated.box.x = distance.x + shared_alienCenter->box.CenterPoint().x; // Moves minion to distance in x axis calculated
+        associated.box.y = distance.y + shared_alienCenter->box.CenterPoint().x; // Moves minion to distance in y axis calculated
     }
     else
         associated.RequestDelete();
@@ -30,17 +32,14 @@ Minion::Minion(GameObject &associated, weak_ptr<GameObject> alienCenter, float a
 
 void Minion::Update(float dt)
 {
-    shared_ptr<GameObject> CenterAlien = make_shared<GameObject>(alienCenter);
-
-    cout << "CenterAlien" << CenterAlien << endl;
-
+    shared_ptr<GameObject> shared_alienCenter = alienCenter.lock();
     Vec2 distance = Vec2(200, 0);
 
-    if (CenterAlien != nullptr) // If Alien is not dead
+    if (shared_alienCenter != nullptr) // If Alien is not dead
     {
         distance.GetRotated(arc); // Rotates minion around the Alien
 
-        distance += CenterAlien->box.CenterPoint(); // Sets distance to move
+        distance += shared_alienCenter->box.CenterPoint();
         distance.x -= associated.box.w / 2;
         distance.y -= associated.box.h / 2;
 

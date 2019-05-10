@@ -27,20 +27,16 @@ void Alien::Start()
 {
     for (int i = 0; i < nMinions; i++)
     {
-        // cout << "Created: " << i << endl;
-        // GameObject *minion_GO(new GameObject());
+        GameObject *minion_GO(new GameObject());
 
-        // weak_ptr<GameObject> weak_Alien = Game::GetInstance().GetState().GetObjectPtr(&associated);
+        weak_ptr<GameObject> weak_Alien = Game::GetInstance().GetState().GetObjectPtr(&associated);
 
-        // Minion *minion = new Minion(*minion_GO, weak_Alien, (360.0 / nMinions) * i);
-        // Component *minion_sprite = minion_GO->GetComponent("Sprite");
+        Minion *minion = new Minion(*minion_GO, weak_Alien, (360.0 / nMinions) * i);
 
-        // minion_GO->box.x = 0;
-        // minion_GO->box.y = 0;
-        // minion_GO->AddComponent(minion);
+        minion_GO->AddComponent(minion);
 
-        // std::weak_ptr<GameObject> weak_minion = Game::GetInstance().GetState().AddObject(minion_GO);
-        // minionArray.emplace_back(weak_minion);
+        std::weak_ptr<GameObject> weak_minion = Game::GetInstance().GetState().AddObject(minion_GO);
+        minionArray.emplace_back(weak_minion);
     }
 }
 
