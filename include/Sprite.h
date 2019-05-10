@@ -1,5 +1,4 @@
-#ifndef SPRITE_H
-#define SPRITE_H
+#pragma once
 
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
@@ -32,5 +31,3 @@ public:
   void Update(float dt);
   bool Is(string type);
 };
-
-#endif
