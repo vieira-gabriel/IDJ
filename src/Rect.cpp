@@ -16,8 +16,9 @@ Rect::~Rect()
 {
 }
 
-float Rect::Inclination(Rect point1, Rect point2)
+float Rect::Inclination(Rect rect)
 {
+    return atan2(rect.x - this->x, rect.y - this->y);
 }
 
 bool Rect::Contains(float valx, float valy)
