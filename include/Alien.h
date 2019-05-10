@@ -5,12 +5,15 @@
 #include "Vec2.h"
 #include "Sprite.h"
 #include "InputManager.h"
+#include "Minion.h"
+#include "Game.h"
 #include <queue>
 #include <cstdlib>
 #include <iostream>
+#include <cmath>
 
 #define ALIEN_HP 100
-#define ALIEN_SPEED 70
+#define ALIEN_SPEED 100
 
 class Alien : public Component
 {
@@ -33,6 +36,7 @@ private:
     int hp;
     queue<Action> taskQueue;
     vector<weak_ptr<GameObject>> minionArray;
+    int nMinions;
 
 public:
     Alien(GameObject &associated, int nMinions);

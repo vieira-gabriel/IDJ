@@ -1,7 +1,7 @@
 #include "Alien.h"
 
 #define ALIEN_SOURCE "assets/img/alien.png"
-#define DISTANCE_ERROR 1
+#define DISTANCE_ERROR 2
 
 Alien::Alien(GameObject &associated, int nMinions) : Component(associated)
 {
@@ -9,18 +9,39 @@ Alien::Alien(GameObject &associated, int nMinions) : Component(associated)
 
     associated.AddComponent(alien);
 
+    associated.box.x -= associated.box.w / 2;
+    associated.box.y -= associated.box.h / 2; // Centralizare Alien
+
     hp = ALIEN_HP;
     speed.x = 0;
     speed.y = 0;
+    this->nMinions = nMinions;
 }
 
 Alien::~Alien()
 {
+    minionArray.clear();
 }
 
 void Alien::Start()
 {
-    // Retornar aqui
+    for (int i = 0; i < nMinions; i++)
+    {
+        // cout << "Created: " << i << endl;
+        // GameObject *minion_GO(new GameObject());
+
+        // weak_ptr<GameObject> weak_Alien = Game::GetInstance().GetState().GetObjectPtr(&associated);
+
+        // Minion *minion = new Minion(*minion_GO, weak_Alien, (360.0 / nMinions) * i);
+        // Component *minion_sprite = minion_GO->GetComponent("Sprite");
+
+        // minion_GO->box.x = 0;
+        // minion_GO->box.y = 0;
+        // minion_GO->AddComponent(minion);
+
+        // std::weak_ptr<GameObject> weak_minion = Game::GetInstance().GetState().AddObject(minion_GO);
+        // minionArray.emplace_back(weak_minion);
+    }
 }
 
 void Alien::Update(float dt)
@@ -34,7 +55,7 @@ void Alien::Update(float dt)
     }
     else if (input.MousePress(RIGHT_MOUSE_BUTTON))
     {
-        Action *action = new Action(Action::MOVE, (float)input.GetMouseX() - Camera::pos.x + associated.box.w, (float)input.GetMouseY() - Camera::pos.y + associated.box.h);
+        Action *action = new Action(Action::MOVE, (float)input.GetMouseX() - Camera::pos.x - associated.box.w / 2, (float)input.GetMouseY() - Camera::pos.y - associated.box.h / 2);
         taskQueue.emplace(*action);
     }
 
@@ -49,7 +70,7 @@ void Alien::Update(float dt)
             speed.x = (vector.x / mag) * ALIEN_SPEED;
             speed.y = (vector.y / mag) * ALIEN_SPEED;
 
-            if ((associated.box.x + associated.box.w / 2 < taskQueue.front().pos.x + DISTANCE_ERROR) && (associated.box.x > taskQueue.front().pos.x - DISTANCE_ERROR) && (associated.box.y < taskQueue.front().pos.y + DISTANCE_ERROR) && (associated.box.y > taskQueue.front().pos.y - DISTANCE_ERROR))
+            if ((vector.x > -(dt * abs(speed.x))) && (vector.x < (dt * abs(speed.x))) && (vector.y > -(dt * abs(speed.y))) && (vector.y < (dt * abs(speed.y))))
             {
                 speed.x = 0;
                 speed.y = 0;

@@ -6,6 +6,7 @@ GameObject::GameObject()
     isDead = false;
     started = false;
     components.clear();
+    box = Rect();
 }
 
 GameObject::~GameObject()
@@ -52,7 +53,9 @@ void GameObject::AddComponent(Component *cpt)
 {
     // If the new component is not a null pointer, it'll be added in the vector
     if (cpt != nullptr)
-        components.emplace_back(cpt); // unique_ptr cant copy, so this move the element to the vector
+        components.emplace_back(cpt);
+    if (started)
+        components.back()->Start();
     Start();
 }
 

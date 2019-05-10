@@ -27,10 +27,7 @@ void Sprite::Open(string file)
 {
     Game &game = Game::GetInstance();
 
-    // if (Sprite::IsOpen())
-    //     Resource treats the texture destruction SDL_DestroyTexture(texture);
-
-    //cout << "File: " << file << endl;
+    SDL_DestroyTexture(texture);
 
     texture = Resources::GetImage(file.c_str()); //IMG_LoadTexture(game.GetRenderer(), file.c_str());
     if (texture == nullptr)
@@ -41,6 +38,9 @@ void Sprite::Open(string file)
 
     SDL_QueryTexture(texture, format, access, &width, &height);
     SetClip(X_DEFAULT, Y_DEFAULT, GetWidth(), GetHeight());
+
+    associated.box.w = width;
+    associated.box.h = height;
 }
 
 void Sprite::SetClip(int x, int y, int w, int h)

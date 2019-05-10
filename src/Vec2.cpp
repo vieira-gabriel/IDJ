@@ -16,14 +16,6 @@ Vec2::~Vec2()
 {
 }
 
-Vec2 Vec2::operator+(const Vec2 &vector)
-{
-    Vec2 result;
-    result.x = this->x + vector.x;
-    result.y = this->y + vector.y;
-    return result;
-}
-
 Vec2 Vec2::Sum(Vec2 vector)
 {
     Vec2 result;
@@ -78,4 +70,63 @@ Vec2 Vec2::GetRotated(float angle)
     this->y = (oldY * cos(angle)) + (oldX * sin(angle));
 
     return *this;
+}
+
+Vec2 Vec2::operator+(const Vec2 &vector)
+{
+    Vec2 result;
+    result.x = this->x + vector.x;
+    result.y = this->y + vector.y;
+    return result;
+}
+
+Vec2 Vec2::operator-(const Vec2 &vec)
+{
+
+    return Vec2(this->x - vec.x, this->y - vec.y);
+}
+
+Vec2 Vec2::operator-()
+{
+
+    return (Vec2(-this->x, -this->y));
+}
+
+Vec2 Vec2::operator*(const float scalar)
+{
+
+    return Vec2(this->x * scalar, this->y * scalar);
+}
+
+void Vec2::operator=(const Vec2 &vec)
+{
+
+    this->x = vec.x;
+    this->y = vec.y;
+}
+
+void Vec2::operator-=(const Vec2 &vec)
+{
+
+    this->x -= vec.x;
+    this->y -= vec.y;
+}
+
+void Vec2::operator+=(const Vec2 &vec)
+{
+
+    this->x += vec.x;
+    this->y += vec.y;
+}
+
+Rect Vec2::operator+(const Rect &rect)
+{
+
+    return Rect(this->x + rect.x, this->y + rect.y, rect.w, rect.h);
+}
+
+Rect Vec2::operator-(const Rect &rect)
+{
+
+    return Rect(this->x - rect.x, this->y - rect.y, rect.w, rect.h);
 }

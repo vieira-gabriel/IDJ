@@ -19,6 +19,8 @@
 #include <memory>
 #include <utility>
 
+#define MINIONS 4
+
 class State
 {
 private:
