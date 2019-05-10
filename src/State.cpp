@@ -87,7 +87,7 @@ void State::Update(float dt)
         //cout << "X = " << (int)objPos.x << " Y = " << (int)objPos.y << endl;
     }
 
-    for (auto i = 0; i < objectArray.size(); i++)
+    for (unsigned int i = 0; i < objectArray.size(); i++)
     {
         objectArray[i]->Update(dt);
         if (objectArray[i]->IsDead())
@@ -101,7 +101,7 @@ void State::Update(float dt)
 void State::Render()
 {
 
-    for (auto i = 0; i < objectArray.size(); i++)
+    for (unsigned int i = 0; i < objectArray.size(); i++)
         objectArray[i]->Render();
 }
 
@@ -119,7 +119,7 @@ weak_ptr<GameObject> State::AddObject(GameObject *go)
 void State::Start()
 {
     LoadAssets();
-    for (int i = 0; i < objectArray.size(); i++)
+    for (unsigned int i = 0; i < objectArray.size(); i++)
     {
         objectArray[i]->Start();
     }
@@ -128,7 +128,7 @@ void State::Start()
 
 weak_ptr<GameObject> State::GetObjectPtr(GameObject *go)
 {
-    for (auto i = 0; i < objectArray.size(); i++)
+    for (unsigned int i = 0; i < objectArray.size(); i++)
     {
         if (objectArray[i].get() == go)
             return (weak_ptr<GameObject>)objectArray[i];
