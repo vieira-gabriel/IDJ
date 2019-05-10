@@ -1,5 +1,4 @@
-#ifndef CAM_FOLLOWER_H
-#define CAM_FOLLOWER_H
+#pragma once
 
 #include "Component.h"
 #include "Camera.h"
@@ -14,5 +13,3 @@ public:
     void Render();
     bool Is(string type);
 };
-
-#endif

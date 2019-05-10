@@ -1,5 +1,4 @@
-#ifndef RESOURCES_H
-#define RESOURCES_H
+#pragma once
 
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
@@ -29,5 +28,3 @@ public:
   static Mix_Chunk *GetSound(string file);
   static void ClearSounds();
 };
-
-#endif

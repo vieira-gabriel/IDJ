@@ -1,5 +1,4 @@
-#ifndef IMPUT_MANAGER_H
-#define IMPUT_MANAGER_H
+#pragma once
 
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
@@ -54,5 +53,3 @@ public:
 
     static InputManager &GetInstance();
 };
-
-#endif

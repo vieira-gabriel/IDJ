@@ -1,5 +1,4 @@
-#ifndef STATE_H
-#define STATE_H
+#pragma once
 
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
@@ -43,5 +42,3 @@ public:
   weak_ptr<GameObject> AddObject(GameObject *go);
   weak_ptr<GameObject> GetObjectPtr(GameObject *go);
 };
-
-#endif

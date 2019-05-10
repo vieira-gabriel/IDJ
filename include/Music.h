@@ -1,5 +1,4 @@
-#ifndef MUSIC_H
-#define MUSIC_H
+#pragma once
 
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
@@ -22,5 +21,3 @@ public:
   void Open(string file);
   bool IsOpen();
 };
-
-#endif

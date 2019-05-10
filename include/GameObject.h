@@ -1,5 +1,4 @@
-#ifndef GAME_OBJECT_H
-#define GAME_OBJECT_H
+#pragma once
 
 #include <Component.h>
 #include <vector>
@@ -32,5 +31,3 @@ public:
   Component *GetComponent(string type);
   void Start();
 };
-
-#endif

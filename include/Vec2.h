@@ -1,5 +1,4 @@
-#ifndef VEC2_H
-#define VEC2_H
+#pragma once
 
 #include <math.h>
 #include "Rect.h"
@@ -35,5 +34,3 @@ public:
   Rect operator+(const Rect &rect);
   Rect operator-(const Rect &rect);
 };
-
-#endif

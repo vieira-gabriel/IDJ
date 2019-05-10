@@ -1,5 +1,4 @@
-#ifndef GAME_H_INCLUDE
-#define GAME_H_INCLUDE
+#pragma once
 
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
@@ -38,5 +37,3 @@ public:
   static Game &GetInstance();
   float GetDeltaTime();
 };
-
-#endif

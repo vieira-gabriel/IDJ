@@ -1,5 +1,4 @@
-#ifndef TILE_SET_H
-#define TILE_SET_H
+#pragma once
 
 #include <Sprite.h>
 
@@ -22,5 +21,3 @@ public:
   int GetTileWidth();
   int GetTileHeight();
 };
-
-#endif

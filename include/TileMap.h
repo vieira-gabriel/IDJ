@@ -1,5 +1,4 @@
-#ifndef TILE_MAP_H
-#define TILE_MAP_H
+#pragma once
 
 #include "GameObject.h"
 #include "TileSet.h"
@@ -36,5 +35,3 @@ public:
   void Render();
   bool Is(string type);
 };
-
-#endif

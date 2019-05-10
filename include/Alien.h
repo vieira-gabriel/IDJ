@@ -1,5 +1,4 @@
-#ifndef ALIEN_H
-#define ALIEN_H
+#pragma once
 
 #include "Component.h"
 #include "Vec2.h"
@@ -13,7 +12,7 @@
 #include <cmath>
 
 #define ALIEN_HP 100
-#define ALIEN_SPEED 100
+#define ALIEN_SPEED 150
 
 class Alien : public Component
 {
@@ -47,5 +46,3 @@ public:
     void Render();
     bool Is(string type);
 };
-
-#endif

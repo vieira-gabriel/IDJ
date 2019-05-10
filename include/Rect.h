@@ -1,5 +1,4 @@
-#ifndef RECT_H
-#define RECT_H
+#pragma once
 
 #include "Vec2.h"
 
@@ -16,7 +15,7 @@ public:
   Rect();
   Rect(float x, float y, float w, float h);
   ~Rect();
-  float Inclination(Rect point1, Rect point2);
+  float Inclination(Rect rect);
   bool Contains(float valx, float);
   Vec2 CenterPoint();
   Rect operator-(const Vec2 &vec);
@@ -25,5 +24,3 @@ public:
   void operator-=(const Vec2 &vec);
   void operator=(const Rect &rec);
 };
-
-#endif

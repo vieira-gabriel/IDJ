@@ -1,5 +1,4 @@
-#ifndef CAMERA_H
-#define CAMERA_H
+#pragma once
 
 #include "Vec2.h"
 #include "GameObject.h"
@@ -24,5 +23,3 @@ public:
     static void Unfollow();
     static void Update(float dt);
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef COMPONENT_H
-#define COMPONENT_H
+#pragma once
 
 #include <GameObject.h>
 #include <iostream>
@@ -25,5 +24,3 @@ public:
   virtual bool Is(string type) = 0;
   virtual void Start();
 };
-
-#endif

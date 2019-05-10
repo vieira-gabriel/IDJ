@@ -1,6 +1,4 @@
-#ifndef SOUND_H
-#define SOUND_H
-
+#pragma once
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
@@ -30,5 +28,3 @@ public:
   void Render();
   bool Is(string file);
 };
-
-#endif
