@@ -25,8 +25,6 @@ Sprite::~Sprite()
 
 void Sprite::Open(string file)
 {
-    Game &game = Game::GetInstance();
-
     SDL_DestroyTexture(texture);
 
     texture = Resources::GetImage(file.c_str()); //IMG_LoadTexture(game.GetRenderer(), file.c_str());
