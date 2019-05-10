@@ -26,14 +26,14 @@ GameObject::~GameObject()
 void GameObject::Update(float dt)
 {
     // Update all components of the vector
-    for (auto i = 0; i < components.size(); i++)
+    for (unsigned int i = 0; i < components.size(); i++)
         components[i]->Update(dt);
 }
 
 void GameObject::Render()
 {
     // Render all components of the vector
-    for (auto i = 0; i < components.size(); i++)
+    for (unsigned int i = 0; i < components.size(); i++)
         components[i]->Render();
 }
 
@@ -56,14 +56,13 @@ void GameObject::AddComponent(Component *cpt)
         components.emplace_back(cpt);
     if (started)
         components.back()->Start();
-    Start();
 }
 
 void GameObject::RemoveComponent(Component *cpt)
 {
     // Go through the vector searching for the component cpt and erase it when cpt
     // is found
-    for (auto i = 0; i < components.size(); i++)
+    for (unsigned int i = 0; i < components.size(); i++)
     {
         if (components[i].get() == cpt)
             components.erase(components.begin() + i);
@@ -74,20 +73,21 @@ Component *GameObject::GetComponent(string type)
 {
     // Go through the vector seraching for the type of component that is requested
     // and return that component
-    for (auto i = 0; i < components.size(); i++)
+    for (unsigned int i = 0; i < components.size(); i++)
     {
         if (components[i]->Is(type))
         {
             return components[i].get(); // Converte unique_ptr para ponteiro
         }
     }
+    return nullptr;
 }
 
 void GameObject::Start()
 {
     if (!started)
     {
-        for (int i = 0; i < components.size(); i++)
+        for (unsigned int i = 0; i < components.size(); i++)
         {
             components[i]->Start();
             components[i]->started = true;
