@@ -44,6 +44,8 @@ void Alien::Update(float dt)
 {
     InputManager &input = InputManager::GetInstance();
 
+    associated.angleDeg -= remainder((ALIEN_ANGLE * dt), 360.0); // Save the rest of the doble/float division, preventing it to be higher than 360 degrees
+
     if (input.MousePress(LEFT_MOUSE_BUTTON))
     {
         Action *action = new Action(Action::SHOOT, (float)input.GetMouseX() + Camera::pos.x, (float)input.GetMouseY() + Camera::pos.y);
@@ -51,7 +53,7 @@ void Alien::Update(float dt)
     }
     else if (input.MousePress(RIGHT_MOUSE_BUTTON))
     {
-        Action *action = new Action(Action::MOVE, (float)input.GetMouseX() - Camera::pos.x - associated.box.w / 2, (float)input.GetMouseY() - Camera::pos.y - associated.box.h / 2);
+        Action *action = new Action(Action::MOVE, (float)input.GetMouseX() + Camera::pos.x, (float)input.GetMouseY() + Camera::pos.y);
         taskQueue.emplace(*action);
     }
 
@@ -78,6 +80,9 @@ void Alien::Update(float dt)
         }
         else if (taskQueue.front().type == Action::SHOOT)
         {
+            Minion *minon = static_cast<Minion *>(minionArray[1].lock()->GetComponent("Minion")); //get minion reference
+            minon->Shoot(taskQueue.front().pos);                                                  //minion shoots
+
             taskQueue.pop();
         }
     }

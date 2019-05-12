@@ -11,10 +11,12 @@ int *access = nullptr;
 Sprite::Sprite(GameObject &associated) : Component(associated)
 {
     texture = nullptr;
+    scale = Vec2(1, 1);
 }
 Sprite::Sprite(GameObject &associated, string file) : Component(associated)
 {
     texture = nullptr;
+    scale = Vec2(1, 1);
     Sprite::Open(file);
 }
 
@@ -60,10 +62,10 @@ void Sprite::Render(int x, int y)
     SDL_Rect dstRect;
     dstRect.x = x;
     dstRect.y = y;
-    dstRect.w = clipRect.w;
-    dstRect.h = clipRect.h;
+    dstRect.w = clipRect.w * scale.x;
+    dstRect.h = clipRect.h * scale.y;
 
-    if (SDL_RenderCopy(instance.GetRenderer(), texture, &clipRect, &dstRect) != 0)
+    if (SDL_RenderCopyEx(instance.GetRenderer(), texture, &clipRect, &dstRect, associated.angleDeg, nullptr, SDL_FLIP_NONE) != 0)
     {
         std::cout << "Fail to render the texture: " << SDL_GetError() << std::endl;
         exit(1);
@@ -72,18 +74,18 @@ void Sprite::Render(int x, int y)
 
 int Sprite::GetHeight()
 {
-    return height;
+    return height * scale.y;
 }
 
 int Sprite::GetWidth()
 {
-    return width;
+    return width * scale.x;
 }
 
 bool Sprite::IsOpen()
 {
-    bool ret = (texture != nullptr) ? true : false;
-    return ret;
+
+    return (texture != nullptr);
 }
 
 void Sprite::Update(float dt)
@@ -94,4 +96,14 @@ bool Sprite::Is(string type)
 {
     // Return true if the type wanted is Sprite
     return (type == "Sprite");
+}
+void Sprite::SetScaleX(float scaleX, float scaleY)
+{
+    Vec2 newScale = Vec2(scaleX, scaleY);
+    if (newScale > Vec2(0, 0))
+        scale = newScale;
+}
+Vec2 Sprite::GetScale()
+{
+    return scale;
 }

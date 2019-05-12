@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "Component.h"
 #include "Sprite.h"
+#include <string>
 
 using namespace std;
 

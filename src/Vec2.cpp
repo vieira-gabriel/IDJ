@@ -72,6 +72,12 @@ Vec2 Vec2::GetRotated(float angle)
     return *this;
 }
 
+float Vec2::Inclination()
+{ //angle between vector and +x axis
+
+    return atan2(y, x) * 180 / PI;
+}
+
 Vec2 Vec2::operator+(const Vec2 &vector)
 {
     Vec2 result;
@@ -96,6 +102,18 @@ Vec2 Vec2::operator*(const float scalar)
 {
 
     return Vec2(this->x * scalar, this->y * scalar);
+}
+
+bool Vec2::operator>(const Vec2 &vec)
+{
+
+    return (this->x > vec.x) && (this->y > vec.y);
+}
+
+bool Vec2::operator<(const Vec2 &vec)
+{
+
+    return (this->x < vec.x) && (this->y < vec.y);
 }
 
 void Vec2::operator=(const Vec2 &vec)

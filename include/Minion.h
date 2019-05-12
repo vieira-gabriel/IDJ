@@ -4,8 +4,12 @@
 #include "Vec2.h"
 #include "Sprite.h"
 #include "Game.h"
+#include "Bullet.h"
 
 #define MINION_AGULAR_VEL 20.0 * PI / 180
+#define BULLET_DAMAGE 5
+#define BULLET_SPEED 200
+#define BULLET_DISTANCE 1000
 
 class Minion : public Component
 {

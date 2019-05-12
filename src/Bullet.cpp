@@ -2,15 +2,16 @@
 
 Bullet::Bullet(GameObject &associated, float angle, float speed, int damage, float maxDistance, string sprite) : Component(associated)
 {
-    Sprite *bullet_sprite = new Sprite(associated, sprite);
+    Sprite *bullet = new Sprite(associated, sprite);
+    associated.AddComponent(bullet);
+
+    associated.angleDeg = angle;
+
     this->damage = damage;
     distanceLeft = maxDistance;
 
-    this->speed.x = speed;
-    this->speed.y = 0; // Set a vector of speed on 0 degrees
-
-    float arc = angle * (PI / 180);
-    this->speed.GetRotated(arc); // Rotate the bullet, so it goes on the desired angle
+    float rad_angle = angle * (PI / 180);
+    this->speed = Vec2(speed * cos(rad_angle), speed * sin(rad_angle));
 }
 
 void Bullet::Update(float dt)

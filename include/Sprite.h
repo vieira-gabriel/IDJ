@@ -16,6 +16,7 @@ private:
   int width;
   int height;
   SDL_Rect clipRect;
+  Vec2 scale;
 
 public:
   Sprite(GameObject &associated);
@@ -30,4 +31,6 @@ public:
   bool IsOpen();
   void Update(float dt);
   bool Is(string type);
+  void SetScaleX(float scaleX, float scaleY);
+  Vec2 GetScale();
 };

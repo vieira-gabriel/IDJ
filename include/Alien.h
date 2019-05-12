@@ -13,6 +13,7 @@
 
 #define ALIEN_HP 100
 #define ALIEN_SPEED 150
+#define ALIEN_ANGLE 20
 
 class Alien : public Component
 {

@@ -7,6 +7,7 @@ GameObject::GameObject()
     started = false;
     components.clear();
     box = Rect();
+    angleDeg = 0;
 }
 
 GameObject::~GameObject()
@@ -17,17 +18,16 @@ GameObject::~GameObject()
     // Removes all elements from the vector (which are destroyed), leaving the container
     // with a size of 0, if components is empty;
     if (components.empty())
-    {
-        cout << "Todos elementos foram apagados" << endl;
         components.clear();
-    }
 }
 
 void GameObject::Update(float dt)
 {
     // Update all components of the vector
     for (unsigned int i = 0; i < components.size(); i++)
+    {
         components[i]->Update(dt);
+    }
 }
 
 void GameObject::Render()

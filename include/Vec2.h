@@ -23,11 +23,14 @@ public:
   float Mag();
   Vec2 Normalize();
   //Inclinação de um vetor em relação ao eixo x
+  float Inclination();
   Vec2 GetRotated(float angle);
   Vec2 operator+(const Vec2 &vec);
   Vec2 operator-(const Vec2 &vec);
   Vec2 operator-();
   Vec2 operator*(const float scalar);
+  bool operator>(const Vec2 &vec);
+  bool operator<(const Vec2 &vec);
   void operator=(const Vec2 &vec);
   void operator-=(const Vec2 &vec);
   void operator+=(const Vec2 &vec);
