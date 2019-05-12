@@ -31,34 +31,33 @@ bool Rect::Contains(float valx, float valy)
 
 Vec2 Rect::CenterPoint()
 {
-    Vec2 center = Vec2(x + w / 2, y + h / 2);
-    return center;
+    return Vec2(x + w / 2.0, y + h / 2.0);
 }
 
-Rect Rect::operator+(const Vec2 &vec)
+Rect Rect::operator+(const Vec2 &vector)
 { //sums rect with vec2 (moves rect along vec) and returns a new rect
 
-    return Rect(this->x + vec.x, this->y + vec.y, this->w, this->h);
+    return Rect(this->x + vector.x, this->y + vector.y, this->w, this->h);
 }
 
-Rect Rect::operator-(const Vec2 &vec)
+Rect Rect::operator-(const Vec2 &vector)
 { //subtracts rect with vec2 (moves rect along - vec) and returns a new rect
 
-    return Rect(this->x - vec.x, this->y - vec.y, this->w, this->h);
+    return Rect(this->x - vector.x, this->y - vector.y, this->w, this->h);
 }
 
-void Rect::operator+=(const Vec2 &vec)
+void Rect::operator+=(const Vec2 &vector)
 { //sums rect with vec2 (moves rect along vec), moving it
 
-    this->x += vec.x;
-    this->y += vec.y;
+    this->x += vector.x;
+    this->y += vector.y;
 }
 
-void Rect::operator-=(const Vec2 &vec)
+void Rect::operator-=(const Vec2 &vector)
 { //subtracts rect with vec2 (moves rect along - vec), movint it
 
-    this->x -= vec.x;
-    this->y -= vec.y;
+    this->x -= vector.x;
+    this->y -= vector.y;
 }
 
 void Rect::operator=(const Rect &rec)

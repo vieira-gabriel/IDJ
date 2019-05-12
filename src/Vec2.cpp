@@ -78,6 +78,15 @@ float Vec2::Inclination()
     return atan2(y, x) * 180 / PI;
 }
 
+float Vec2::DistanceTo(Vec2 vector)
+{
+
+    float del_x = this->x - vector.x;
+    float del_y = this->y - vector.y;
+
+    return sqrt(del_x * del_x + del_y * del_y);
+}
+
 Vec2 Vec2::operator+(const Vec2 &vector)
 {
     Vec2 result;
@@ -86,10 +95,10 @@ Vec2 Vec2::operator+(const Vec2 &vector)
     return result;
 }
 
-Vec2 Vec2::operator-(const Vec2 &vec)
+Vec2 Vec2::operator-(const Vec2 &vector)
 {
 
-    return Vec2(this->x - vec.x, this->y - vec.y);
+    return Vec2(this->x - vector.x, this->y - vector.y);
 }
 
 Vec2 Vec2::operator-()
@@ -104,37 +113,37 @@ Vec2 Vec2::operator*(const float scalar)
     return Vec2(this->x * scalar, this->y * scalar);
 }
 
-bool Vec2::operator>(const Vec2 &vec)
+bool Vec2::operator>(const Vec2 &vector)
 {
 
-    return (this->x > vec.x) && (this->y > vec.y);
+    return (this->x > vector.x) && (this->y > vector.y);
 }
 
-bool Vec2::operator<(const Vec2 &vec)
+bool Vec2::operator<(const Vec2 &vector)
 {
 
-    return (this->x < vec.x) && (this->y < vec.y);
+    return (this->x < vector.x) && (this->y < vector.y);
 }
 
-void Vec2::operator=(const Vec2 &vec)
+void Vec2::operator=(const Vec2 &vector)
 {
 
-    this->x = vec.x;
-    this->y = vec.y;
+    this->x = vector.x;
+    this->y = vector.y;
 }
 
-void Vec2::operator-=(const Vec2 &vec)
+void Vec2::operator-=(const Vec2 &vector)
 {
 
-    this->x -= vec.x;
-    this->y -= vec.y;
+    this->x -= vector.x;
+    this->y -= vector.y;
 }
 
-void Vec2::operator+=(const Vec2 &vec)
+void Vec2::operator+=(const Vec2 &vector)
 {
 
-    this->x += vec.x;
-    this->y += vec.y;
+    this->x += vector.x;
+    this->y += vector.y;
 }
 
 Rect Vec2::operator+(const Rect &rect)

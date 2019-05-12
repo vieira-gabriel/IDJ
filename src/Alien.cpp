@@ -29,14 +29,15 @@ void Alien::Start()
     {
         GameObject *minion_GO(new GameObject());
 
+        weak_ptr<GameObject> weak_minion = Game::GetInstance().GetState().AddObject(minion_GO);
+        minionArray.emplace_back(weak_minion);
+        shared_ptr<GameObject> shared_minion = weak_minion.lock();
+
         weak_ptr<GameObject> weak_Alien = Game::GetInstance().GetState().GetObjectPtr(&associated);
 
-        Minion *minion = new Minion(*minion_GO, weak_Alien, (360.0 / nMinions) * i);
+        Minion *minion = new Minion(*shared_minion, weak_Alien, (360.0 / nMinions) * i);
 
-        minion_GO->AddComponent(minion);
-
-        std::weak_ptr<GameObject> weak_minion = Game::GetInstance().GetState().AddObject(minion_GO);
-        minionArray.emplace_back(weak_minion);
+        shared_minion->AddComponent(minion);
     }
 }
 
@@ -80,9 +81,26 @@ void Alien::Update(float dt)
         }
         else if (taskQueue.front().type == Action::SHOOT)
         {
-            Minion *minon = static_cast<Minion *>(minionArray[1].lock()->GetComponent("Minion")); //get minion reference
-            minon->Shoot(taskQueue.front().pos);                                                  //minion shoots
+            float closestDistance = minionArray[0].lock()->box.CenterPoint().DistanceTo(taskQueue.front().pos);
+            int closestMinion = 0;
+            for (unsigned int i = 0; i < minionArray.size(); i++)
+            {
 
+                float minionDistance = minionArray[i].lock()->box.CenterPoint().DistanceTo(taskQueue.front().pos);
+
+                if (minionDistance < closestDistance)
+                {
+
+                    closestDistance = minionDistance;
+                    closestMinion = i;
+                }
+            }
+
+            if (minionArray[closestMinion].lock() != nullptr)
+            {
+                Minion *minon = static_cast<Minion *>(minionArray[closestMinion].lock()->GetComponent("Minion")); //get minion reference
+                minon->Shoot(taskQueue.front().pos);                                                              //minion shoots
+            }
             taskQueue.pop();
         }
     }

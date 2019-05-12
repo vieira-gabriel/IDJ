@@ -12,7 +12,6 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
-    cout << "Destructor of GameObject was called " << endl;
     // Removes and destroy elements of the vector
     components.erase(components.begin(), components.end());
     // Removes all elements from the vector (which are destroyed), leaving the container

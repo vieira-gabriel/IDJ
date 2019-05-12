@@ -18,9 +18,9 @@ public:
   float Inclination(Rect rect);
   bool Contains(float valx, float);
   Vec2 CenterPoint();
-  Rect operator-(const Vec2 &vec);
-  Rect operator+(const Vec2 &vec);
-  void operator+=(const Vec2 &vec);
-  void operator-=(const Vec2 &vec);
+  Rect operator-(const Vec2 &vector);
+  Rect operator+(const Vec2 &vector);
+  void operator+=(const Vec2 &vector);
+  void operator-=(const Vec2 &vector);
   void operator=(const Rect &rec);
 };
