@@ -9,7 +9,6 @@ Minion::Minion(GameObject &associated, weak_ptr<GameObject> alienCenter, float a
 
     float scale = (float(rand() % 50 + 1) / 100.0) + 1.0;
     minion->SetScaleX(scale, scale);
-    cout << "Minion scale: " << minion->GetScale().x << '\t' << minion->GetScale().y << endl;
 
     associated.AddComponent(minion);
 

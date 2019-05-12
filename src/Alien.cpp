@@ -48,12 +48,12 @@ void Alien::Update(float dt)
 
     if (input.MousePress(LEFT_MOUSE_BUTTON))
     {
-        Action *action = new Action(Action::SHOOT, (float)input.GetMouseX() + Camera::pos.x, (float)input.GetMouseY() + Camera::pos.y);
+        Action *action = new Action(Action::SHOOT, (float)input.GetMouseX() - Camera::pos.x, (float)input.GetMouseY() - Camera::pos.y);
         taskQueue.emplace(*action);
     }
     else if (input.MousePress(RIGHT_MOUSE_BUTTON))
     {
-        Action *action = new Action(Action::MOVE, (float)input.GetMouseX() + Camera::pos.x, (float)input.GetMouseY() + Camera::pos.y);
+        Action *action = new Action(Action::MOVE, (float)input.GetMouseX() - Camera::pos.x, (float)input.GetMouseY() - Camera::pos.y);
         taskQueue.emplace(*action);
     }
 
