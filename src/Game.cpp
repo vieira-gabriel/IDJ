@@ -1,10 +1,6 @@
 #include "Game.h"
 #include "Resources.h"
 
-#define CHUNKSIZE 1024
-#define WINDOW_FLAG 0
-#define AUDIO_CHANNELS 32
-
 Game *Game::instance = nullptr;
 
 Game::Game(string title, int width, int height)

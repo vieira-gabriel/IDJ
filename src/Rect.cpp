@@ -29,42 +29,60 @@ bool Rect::Contains(float valx, float valy)
     return false;
 }
 
+void Rect::SetCenter(Vec2 center)
+{
+    this->x = center.x - (this->w / 2.0);
+    this->y = center.y - (this->h / 2.0);
+}
+
 Vec2 Rect::CenterPoint()
 {
     return Vec2(x + w / 2.0, y + h / 2.0);
 }
 
 Rect Rect::operator+(const Vec2 &vector)
-{ //sums rect with vec2 (moves rect along vec) and returns a new rect
+{
 
     return Rect(this->x + vector.x, this->y + vector.y, this->w, this->h);
 }
 
 Rect Rect::operator-(const Vec2 &vector)
-{ //subtracts rect with vec2 (moves rect along - vec) and returns a new rect
+{
 
     return Rect(this->x - vector.x, this->y - vector.y, this->w, this->h);
 }
 
+Rect Rect::operator*(const Vec2 &vector)
+{
+    return Rect(this->x, this->y, this->w * vector.x, this->h * vector.y);
+}
+
 void Rect::operator+=(const Vec2 &vector)
-{ //sums rect with vec2 (moves rect along vec), moving it
+{
 
     this->x += vector.x;
     this->y += vector.y;
 }
 
+void Rect::operator+=(const Rect &rect)
+{
+
+    this->x += rect.x;
+    this->y += rect.y;
+}
+
 void Rect::operator-=(const Vec2 &vector)
-{ //subtracts rect with vec2 (moves rect along - vec), movint it
+{
 
     this->x -= vector.x;
     this->y -= vector.y;
 }
 
-void Rect::operator=(const Rect &rec)
-{ //assigns this rect to a given rect
+void Rect::operator=(const Rect &rect)
+{
 
-    this->x = rec.x;
-    this->y = rec.y;
-    this->w = rec.w;
-    this->h = rec.h;
+    this->x = rect.x;
+    this->y = rect.y;
+    this->w = rect.w;
+    this->h = rect.h;
 }

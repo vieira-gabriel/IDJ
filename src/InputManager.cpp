@@ -1,12 +1,5 @@
 #include "InputManager.h"
 
-#define PI 3.14159265
-#define QUIT SDL_QUIT
-#define CLICK_MOUSE_DOWN SDL_MOUSEBUTTONDOWN
-#define CLICK_MOUSE_UP SDL_MOUSEBUTTONUP
-#define KEY_DOWN SDL_KEYDOWN
-#define KEY_UP SDL_KEYUP
-
 InputManager::InputManager()
 {
     for (int i = 0; i < 6; i++)

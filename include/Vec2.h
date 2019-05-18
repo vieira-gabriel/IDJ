@@ -30,6 +30,8 @@ public:
   Vec2 operator-(const Vec2 &vector);
   Vec2 operator-();
   Vec2 operator*(const float scalar);
+  Vec2 operator/(const float scalar);
+  float operator*(const Vec2 &vector);
   bool operator>(const Vec2 &vector);
   bool operator<(const Vec2 &vector);
   void operator=(const Vec2 &vector);
@@ -37,4 +39,5 @@ public:
   void operator+=(const Vec2 &vector);
   Rect operator+(const Rect &rect);
   Rect operator-(const Rect &rect);
+  Vec2 operator*(const float rhs) const;
 };

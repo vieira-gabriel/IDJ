@@ -1,14 +1,5 @@
 #include <State.h>
 
-#define BACKGROUND_SPRITE "assets/img/ocean.jpg"
-#define BACKGROUND_MUSIC "assets/audio/stageState.ogg"
-#define PENGUIN_SOURCE "assets/img/penguinface.png"
-#define PENGUIN_SOUND "assets/audio/boom.wav"
-#define TILE_MAP_SOURCE "assets/map/tileMap.txt"
-#define TILE_SET_SOURCE "assets/img/tileset.png"
-#define TILE_WIDTH 64
-#define TILE_HEIGHT 64
-
 std::vector<std::unique_ptr<GameObject>>::iterator it;
 
 State::State() : music(BACKGROUND_MUSIC)
@@ -16,7 +7,6 @@ State::State() : music(BACKGROUND_MUSIC)
     // Create and initialize Background
     bg = shared_ptr<GameObject>(new GameObject());
     Sprite *newSprite = new Sprite(*bg, BACKGROUND_SPRITE);
-    CameraFollower *follow = new CameraFollower(*bg);
 
     bg->box.x = 0;
     bg->box.y = 0;
@@ -24,9 +14,11 @@ State::State() : music(BACKGROUND_MUSIC)
     bg->box.h = newSprite->GetHeight();
 
     bg->AddComponent(newSprite);
+
+    CameraFollower *follow = new CameraFollower(*bg);
     bg->AddComponent(follow);
 
-    objectArray.emplace_back(std::move(bg));
+    objectArray.emplace_back(move(bg));
 
     // Create and initialize TileMap
     shared_ptr<GameObject> GOMap = shared_ptr<GameObject>(new GameObject());
@@ -39,7 +31,7 @@ State::State() : music(BACKGROUND_MUSIC)
 
     GOMap->AddComponent(tMap);
 
-    objectArray.emplace_back(std::move(GOMap));
+    objectArray.emplace_back(move(GOMap));
 
     quitRequested = false;
     started = false;
@@ -56,6 +48,20 @@ State::State() : music(BACKGROUND_MUSIC)
     Alien *theAlien = new Alien(*alien, MINIONS);
 
     alien->AddComponent(theAlien);
+
+    // Create and initialize Penguin
+    GameObject *penguin_GO = new GameObject();
+    weak_ptr<GameObject> weak_penguin = AddObject(penguin_GO);
+    shared_ptr<GameObject> penguin = weak_penguin.lock();
+
+    penguin->box.x = 704;
+    penguin->box.y = 640;
+
+    Camera::Follow(penguin.get());
+
+    PenguinBody *thePenguin = new PenguinBody(*penguin);
+
+    penguin->AddComponent(thePenguin);
 }
 
 State::~State()
@@ -92,6 +98,21 @@ void State::Update(float dt)
         objectArray[i]->Update(dt);
         if (objectArray[i]->IsDead())
             objectArray.erase(objectArray.begin() + i);
+    }
+
+    for (unsigned int i = 0; i < objectArray.size(); i++)
+    {
+        Collider *firstCollider = dynamic_cast<Collider *>(objectArray[i]->GetComponent("Collider"));
+        if (firstCollider != nullptr)
+            for (unsigned int j = (i + 1); j < objectArray.size(); j++)
+            {
+                Collider *secondCollider = dynamic_cast<Collider *>(objectArray[j]->GetComponent("Collider"));
+                if (secondCollider != nullptr && Collision::IsColliding(firstCollider->box, secondCollider->box, objectArray[i]->angleDeg * (PI / 180), objectArray[i]->angleDeg * (PI / 180)))
+                {
+                    objectArray[i]->NotifyCollision(*(objectArray[j]));
+                    objectArray[j]->NotifyCollision(*(objectArray[i]));
+                }
+            }
     }
     //quitRequested = (SDL_QuitRequested() == true) ? true : false;
 

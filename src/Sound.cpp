@@ -5,6 +5,7 @@ Sound::Sound(GameObject &associated) : Component(associated) // Construct Compon
 {
     // Atribute null pinter to chunk
     chunk = nullptr;
+    channel = -2;
 }
 
 Sound::Sound(GameObject &associated, string file) : Sound(associated)
@@ -18,13 +19,15 @@ Sound::~Sound()
     if (chunk != nullptr)
     {
         Mix_HaltChannel(channel);
-        Mix_FreeChunk(chunk);
+        // Mix_FreeChunk(chunk);
     }
 }
 
 void Sound::Play(int times = 1)
 {
-    channel = Mix_PlayChannel(-1, chunk, 1);
+    if (times > 0)
+        times -= 1;
+    channel = Mix_PlayChannel(-1, chunk, times);
 }
 
 void Sound::Stop()
@@ -34,7 +37,14 @@ void Sound::Stop()
 }
 void Sound::Open(string file)
 {
-    chunk = Resources::GetSound(file); // Mix_LoadWAV(file.c_str());
+    chunk = Resources::GetSound(file.c_str());
+    if (chunk == nullptr)
+    {
+        // Falha em carregar o som.
+        std::cout << "Faile to load sound: " << file.c_str() << "\n";
+        std::cout << "SDL_GetError: " << SDL_GetError() << "\n";
+        //exit(EXIT_FAILURE);
+    }
 }
 bool Sound::IsOpen()
 {

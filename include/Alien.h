@@ -6,6 +6,7 @@
 #include "InputManager.h"
 #include "Minion.h"
 #include "Game.h"
+#include "Collider.h"
 #include <queue>
 #include <cstdlib>
 #include <iostream>
@@ -14,31 +15,55 @@
 #define ALIEN_HP 100
 #define ALIEN_SPEED 150
 #define ALIEN_ANGLE 20
+#define ALIEN_SOURCE "assets/img/alien.png"
+#define DISTANCE_ERROR 2
+
+#define ALIEN_DEATH_SRC "assets/img/aliendeath.png"
+#define ALIEN_DEATH_FRAME 4
+#define ALIEN_DEATH_FM_TIME 0.3
+#define ALIEN_DEATH_SF_DEST ALIEN_DEATH_FRAME *ALIEN_DEATH_FM_TIME
+#define ALIEN_DEATH_SOUND_SRC "assets/audio/boom.wav"
+
+#define ALIEN_REST 2
+#define SHOOT_COOLDOWN 0.8
 
 class Alien : public Component
 {
 private:
-    class Action
-    {
-    public:
-        enum ActionType
-        {
-            MOVE,
-            SHOOT
-        };
-        ActionType type;
-        Vec2 pos;
+    // class Action
+    // {
+    // public:
+    //     enum ActionType
+    //     {
+    //         MOVE,
+    //         SHOOT
+    //     };
+    //     ActionType type;
+    //     Vec2 pos;
 
-        Action(ActionType type, float x, float y);
-    };
+    //     Action(ActionType type, float x, float y);
+    // };
 
     Vec2 speed;
     int hp;
-    queue<Action> taskQueue;
+    // queue<Action> taskQueue;
     vector<weak_ptr<GameObject>> minionArray;
     int nMinions;
 
+    enum AlienState
+    {
+        MOVING,
+        RESTING
+    };
+
+    AlienState state;
+    Timer restTime;
+    Timer shootTime;
+    Vec2 destination;
+
 public:
+    int alienCount;
+
     Alien(GameObject &associated, int nMinions);
     ~Alien();
 
@@ -46,4 +71,5 @@ public:
     void Update(float dt);
     void Render();
     bool Is(string type);
+    void NotifyCollision(GameObject &other);
 };

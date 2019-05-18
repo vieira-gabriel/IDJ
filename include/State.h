@@ -12,12 +12,21 @@
 #include "Camera.h"
 #include "CameraFollower.h"
 #include "Alien.h"
+#include "PenguinBody.h"
+#include "Collision.h"
 #include <SDL_include.h>
 #include <string>
 #include <vector>
 #include <memory>
-#include <utility>
 
+const string BACKGROUND_SPRITE = "assets/img/ocean.jpg";
+#define BACKGROUND_MUSIC "assets/audio/stageState.ogg"
+#define PENGUIN_SOURCE "assets/img/penguinface.png"
+#define PENGUIN_SOUND "assets/audio/boom.wav"
+#define TILE_MAP_SOURCE "assets/map/tileMap.txt"
+#define TILE_SET_SOURCE "assets/img/tileset.png"
+#define TILE_WIDTH 64
+#define TILE_HEIGHT 64
 #define MINIONS 4
 
 class State

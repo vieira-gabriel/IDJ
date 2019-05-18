@@ -12,12 +12,22 @@ Sprite::Sprite(GameObject &associated) : Component(associated)
 {
     texture = nullptr;
     scale = Vec2(1, 1);
+    frameCount = 1;
+    frameTime = 1;
+    currentFrame = 0;
+    timeElapsed = 0;
 }
-Sprite::Sprite(GameObject &associated, string file) : Component(associated)
+Sprite::Sprite(GameObject &associated, string file, int frameCount, float frameTime, float secondsToSelfDestruct) : Component(associated)
 {
     texture = nullptr;
     scale = Vec2(1, 1);
+    this->frameCount = frameCount;
+    this->frameTime = frameTime;
+    this->secondsToSelfDestruct = secondsToSelfDestruct;
+
     Sprite::Open(file);
+    currentFrame = 0;
+    timeElapsed = 0;
 }
 
 Sprite::~Sprite()
@@ -29,7 +39,7 @@ void Sprite::Open(string file)
 {
     SDL_DestroyTexture(texture);
 
-    texture = Resources::GetImage(file.c_str()); //IMG_LoadTexture(game.GetRenderer(), file.c_str());
+    texture = Resources::GetImage(file.c_str());
     if (texture == nullptr)
     {
         std::cout << "Fail to load texture " << SDL_GetError() << std::endl;
@@ -53,7 +63,7 @@ void Sprite::SetClip(int x, int y, int w, int h)
 
 void Sprite::Render()
 {
-    Render(associated.box.x + Camera::pos.x, associated.box.y + Camera::pos.y);
+    Render(associated.box.x - Camera::pos.x, associated.box.y - Camera::pos.y);
 }
 
 void Sprite::Render(int x, int y)
@@ -79,7 +89,7 @@ int Sprite::GetHeight()
 
 int Sprite::GetWidth()
 {
-    return width * scale.x;
+    return (width / frameCount) * scale.x;
 }
 
 bool Sprite::IsOpen()
@@ -90,6 +100,27 @@ bool Sprite::IsOpen()
 
 void Sprite::Update(float dt)
 {
+    if (frameCount != 1)
+    {
+        timeElapsed += dt;
+
+        if (timeElapsed > frameTime)
+        {
+
+            timeElapsed = 0;
+            if (currentFrame < frameCount - 1)
+                currentFrame = currentFrame + 1;
+        }
+        SetClip((width / frameCount) * currentFrame, clipRect.y, width / frameCount, height);
+    }
+    if (secondsToSelfDestruct > 0)
+    {
+        selfDestructCount.Update(dt);
+        if (selfDestructCount.Get() > secondsToSelfDestruct)
+        {
+            associated.RequestDelete();
+        }
+    }
 }
 
 bool Sprite::Is(string type)
@@ -106,4 +137,26 @@ void Sprite::SetScaleX(float scaleX, float scaleY)
 Vec2 Sprite::GetScale()
 {
     return scale;
+}
+void Sprite::SetFrame(int frame)
+{
+    currentFrame = frame;
+    SetClip((width / frameCount) * currentFrame, clipRect.y, width / frameCount, height);
+}
+
+void Sprite::SetFrameCount(int frameCount)
+{
+    if (frameCount > 0)
+    {
+        this->frameCount = frameCount;
+
+        associated.box.w = width / frameCount;
+        SetClip((width / frameCount) * currentFrame, clipRect.y, width / frameCount, height);
+    }
+}
+
+void Sprite::SetFrameTime(float frameTime)
+{
+    this->frameTime = frameTime;
+    timeElapsed = 0;
 }

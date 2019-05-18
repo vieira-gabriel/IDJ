@@ -28,13 +28,13 @@ void Camera::Update(float dt)
     else
     {
         if (IM.IsKeyDown(LEFT_ARROW_KEY))
-            speed.x = DEFAULT_SPEED;
-        if (IM.IsKeyDown(RIGHT_ARROW_KEY))
             speed.x = -DEFAULT_SPEED;
+        if (IM.IsKeyDown(RIGHT_ARROW_KEY))
+            speed.x = DEFAULT_SPEED;
         if (IM.IsKeyDown(DOWN_ARROW_KEY))
-            speed.y = -DEFAULT_SPEED;
-        if (IM.IsKeyDown(UP_ARROW_KEY))
             speed.y = DEFAULT_SPEED;
+        if (IM.IsKeyDown(UP_ARROW_KEY))
+            speed.y = -DEFAULT_SPEED;
 
         pos.x += speed.x * dt;
         pos.y += speed.y * dt;

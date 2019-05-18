@@ -12,6 +12,10 @@
 #include <memory>
 #include <time.h>
 
+#define CHUNKSIZE 1024
+#define WINDOW_FLAG 0
+#define AUDIO_CHANNELS 32
+
 using namespace std;
 
 class State;

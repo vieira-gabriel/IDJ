@@ -17,10 +17,13 @@ public:
   ~Rect();
   float Inclination(Rect rect);
   bool Contains(float valx, float);
+  void SetCenter(Vec2 center);
   Vec2 CenterPoint();
   Rect operator-(const Vec2 &vector);
   Rect operator+(const Vec2 &vector);
+  Rect operator*(const Vec2 &vector);
   void operator+=(const Vec2 &vector);
+  void operator+=(const Rect &rect);
   void operator-=(const Vec2 &vector);
-  void operator=(const Rect &rec);
+  void operator=(const Rect &rect);
 };

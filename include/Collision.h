@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Rect.h"
 #include "Vec2.h"
 
@@ -24,12 +26,12 @@ public:
 
         for (auto &v : A)
         {
-            v = Rotate(v - a.GetCenter(), angleOfA) + a.GetCenter();
+            v = Rotate(v - a.CenterPoint(), angleOfA) + a.CenterPoint();
         }
 
         for (auto &v : B)
         {
-            v = Rotate(v - b.GetCenter(), angleOfB) + b.GetCenter();
+            v = Rotate(v - b.CenterPoint(), angleOfB) + b.CenterPoint();
         }
 
         Vec2 axes[] = {Norm(A[0] - A[1]), Norm(A[1] - A[2]), Norm(B[0] - B[1]), Norm(B[1] - B[2])};

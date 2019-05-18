@@ -60,8 +60,6 @@ Vec2 Vec2::Normalize()
     return result;
 }
 
-//Inclinação de um vetor em relação ao eixo x
-
 Vec2 Vec2::GetRotated(float angle)
 {
     float oldX = this->x;
@@ -73,7 +71,7 @@ Vec2 Vec2::GetRotated(float angle)
 }
 
 float Vec2::Inclination()
-{ //angle between vector and +x axis
+{
 
     return atan2(y, x) * 180 / PI;
 }
@@ -111,6 +109,16 @@ Vec2 Vec2::operator*(const float scalar)
 {
 
     return Vec2(this->x * scalar, this->y * scalar);
+}
+
+Vec2 Vec2::operator/(const float scalar)
+{
+    return Vec2(this->x / scalar, this->y / scalar);
+}
+
+float Vec2::operator*(const Vec2 &vector)
+{
+    return this->x * vector.x + this->y * vector.y;
 }
 
 bool Vec2::operator>(const Vec2 &vector)
@@ -156,4 +164,9 @@ Rect Vec2::operator-(const Rect &rect)
 {
 
     return Rect(this->x - rect.x, this->y - rect.y, rect.w, rect.h);
+}
+
+Vec2 Vec2::operator*(const float rhs) const
+{
+    return Vec2(x * rhs, y * rhs);
 }

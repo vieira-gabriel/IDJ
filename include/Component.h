@@ -23,4 +23,5 @@ public:
   virtual void Render() = 0;
   virtual bool Is(string type) = 0;
   virtual void Start();
+  virtual void NotifyCollision(GameObject &other);
 };
