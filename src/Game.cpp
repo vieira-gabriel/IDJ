@@ -87,6 +87,7 @@ Game::~Game()
     Resources::ClearImages();
     Resources::ClearSounds();
     Resources::ClearMusics();
+    Resources::ClearFont();
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
@@ -157,6 +158,7 @@ void Game::Run()
             Resources::ClearImages();
             Resources::ClearSounds();
             Resources::ClearMusics();
+            Resources::ClearFont();
 
             if (!stateStack.empty())
             {
@@ -179,6 +181,7 @@ void Game::Run()
     Resources::ClearImages();
     Resources::ClearSounds();
     // Resources::ClearMusics();
+    Resources::ClearFont();
 }
 
 void Game::CalculateDeltaTime()
