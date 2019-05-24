@@ -37,7 +37,7 @@ Sprite::~Sprite()
 
 void Sprite::Open(string file)
 {
-    SDL_DestroyTexture(texture);
+    SDL_DestroyTexture(texture.get());
 
     texture = Resources::GetImage(file.c_str());
     if (texture == nullptr)
@@ -46,7 +46,7 @@ void Sprite::Open(string file)
         exit(1);
     }
 
-    SDL_QueryTexture(texture, format, access, &width, &height);
+    SDL_QueryTexture(texture.get(), format, access, &width, &height);
     SetClip(X_DEFAULT, Y_DEFAULT, GetWidth(), GetHeight());
 
     associated.box.w = width;
@@ -75,7 +75,7 @@ void Sprite::Render(int x, int y)
     dstRect.w = clipRect.w * scale.x;
     dstRect.h = clipRect.h * scale.y;
 
-    if (SDL_RenderCopyEx(instance.GetRenderer(), texture, &clipRect, &dstRect, associated.angleDeg, nullptr, SDL_FLIP_NONE) != 0)
+    if (SDL_RenderCopyEx(instance.GetRenderer(), texture.get(), &clipRect, &dstRect, associated.angleDeg, nullptr, SDL_FLIP_NONE) != 0)
     {
         std::cout << "Fail to render the texture: " << SDL_GetError() << std::endl;
         exit(1);

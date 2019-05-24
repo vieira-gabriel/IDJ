@@ -15,14 +15,14 @@ Music::Music(string file)
 Music::~Music()
 {
     Stop(1500);
-    Mix_FreeMusic(music);
+    Mix_FreeMusic(music.get());
 }
 
 void Music::Play(int times = -1)
 {
     if (music != nullptr)
     {
-        if (Mix_PlayMusic(music, times) == -1)
+        if (Mix_PlayMusic(music.get(), times) == -1)
         {
             std::cout << "Error playing music: " << SDL_GetError() << std::endl;
             exit(1);
@@ -41,7 +41,7 @@ void Music::Stop(int msToStop = 1500)
 
 void Music::Open(string file)
 {
-    music = Resources::GetMusic(file);
+    music = Resources::GetMusic(file.c_str());
 }
 
 bool Music::IsOpen()

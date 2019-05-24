@@ -4,13 +4,14 @@
 #define INCLUDE_SDL_MIXER
 #include <SDL_include.h>
 #include <iostream>
+#include <memory>
 
 using namespace std;
 
 class Music
 {
 private:
-  Mix_Music *music;
+  shared_ptr<Mix_Music> music;
 
 public:
   Music();

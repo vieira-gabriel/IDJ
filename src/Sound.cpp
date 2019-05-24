@@ -27,7 +27,7 @@ void Sound::Play(int times = 1)
 {
     if (times > 0)
         times -= 1;
-    channel = Mix_PlayChannel(-1, chunk, times);
+    channel = Mix_PlayChannel(-1, chunk.get(), times);
 }
 
 void Sound::Stop()

@@ -12,7 +12,7 @@ using namespace std;
 class Sound : public Component
 {
 private:
-  Mix_Chunk *chunk;
+  shared_ptr<Mix_Chunk> chunk;
   int channel;
 
 public:
