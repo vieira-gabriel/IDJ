@@ -56,7 +56,7 @@ bool PenguinCannon::Is(string type)
 void PenguinCannon::Shoot()
 {
     GameObject *bullet_GO = new GameObject;
-    weak_ptr<GameObject> weak_bullet = Game::GetInstance().GetState().AddObject(bullet_GO);
+    weak_ptr<GameObject> weak_bullet = Game::GetInstance().GetCurrentState().AddObject(bullet_GO);
     shared_ptr<GameObject> shared_bullet = weak_bullet.lock();
 
     Bullet *bullet = new Bullet(*shared_bullet, angle, PENGUIN_BULLET_SPEED, PENGUIN_BULLET_DAMAGE, PENGUIN_BULLET_DISTANCE, PENGUIN_BULLET_SOURCE, P_BULLET_FRAMES, P_BULLET_FM_TIME, false);

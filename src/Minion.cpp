@@ -57,7 +57,7 @@ void Minion::Update(float dt)
     {
         associated.RequestDelete();
         GameObject *death = new GameObject();
-        std::weak_ptr<GameObject> weak_ptr = Game::GetInstance().GetState().AddObject(death);
+        std::weak_ptr<GameObject> weak_ptr = Game::GetInstance().GetCurrentState().AddObject(death);
         std::shared_ptr<GameObject> ptr = weak_ptr.lock();
 
         Sprite *death_sprite = new Sprite(*ptr, ALIEN_DEATH_SRC, ALIEN_DEATH_FRAME, ALIEN_DEATH_FM_TIME, ALIEN_DEATH_SF_DEST);
@@ -78,7 +78,7 @@ bool Minion::Is(string type)
 void Minion::Shoot(Vec2 target)
 {
     GameObject *bullet_GO = new GameObject;
-    weak_ptr<GameObject> weak_bullet = Game::GetInstance().GetState().AddObject(bullet_GO);
+    weak_ptr<GameObject> weak_bullet = Game::GetInstance().GetCurrentState().AddObject(bullet_GO);
     shared_ptr<GameObject> shared_bullet = weak_bullet.lock();
 
     float angle = (target - associated.box.CenterPoint()).Inclination();

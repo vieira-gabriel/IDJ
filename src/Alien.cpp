@@ -32,11 +32,11 @@ void Alien::Start()
     {
         GameObject *minion_GO(new GameObject());
 
-        weak_ptr<GameObject> weak_minion = Game::GetInstance().GetState().AddObject(minion_GO);
+        weak_ptr<GameObject> weak_minion = Game::GetInstance().GetCurrentState().AddObject(minion_GO);
         minionArray.emplace_back(weak_minion);
         shared_ptr<GameObject> shared_minion = weak_minion.lock();
 
-        weak_ptr<GameObject> weak_Alien = Game::GetInstance().GetState().GetObjectPtr(&associated);
+        weak_ptr<GameObject> weak_Alien = Game::GetInstance().GetCurrentState().GetObjectPtr(&associated);
 
         Minion *minion = new Minion(*shared_minion, weak_Alien, (360.0 / nMinions) * i);
 
@@ -136,7 +136,7 @@ void Alien::Update(float dt)
         associated.RequestDelete();
 
         GameObject *death = new GameObject();
-        std::weak_ptr<GameObject> weak_ptr = Game::GetInstance().GetState().AddObject(death);
+        std::weak_ptr<GameObject> weak_ptr = Game::GetInstance().GetCurrentState().AddObject(death);
         std::shared_ptr<GameObject> ptr = weak_ptr.lock();
 
         Sprite *death_sprite = new Sprite(*ptr, ALIEN_DEATH_SRC, ALIEN_DEATH_FRAME, ALIEN_DEATH_FM_TIME, ALIEN_DEATH_SF_DEST);

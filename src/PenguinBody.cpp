@@ -25,10 +25,10 @@ PenguinBody::~PenguinBody()
 void PenguinBody::Start()
 {
     GameObject *cannon_GO = new GameObject();
-    pcannon = Game::GetInstance().GetState().AddObject(cannon_GO);
+    pcannon = Game::GetInstance().GetCurrentState().AddObject(cannon_GO);
     shared_ptr<GameObject> shared_cannon = pcannon.lock();
 
-    PenguinCannon *cannon = new PenguinCannon(*shared_cannon, Game::GetInstance().GetState().GetObjectPtr(&associated));
+    PenguinCannon *cannon = new PenguinCannon(*shared_cannon, Game::GetInstance().GetCurrentState().GetObjectPtr(&associated));
 
     shared_cannon->box = associated.box;
 
@@ -90,7 +90,7 @@ void PenguinBody::Update(float dt)
         Camera::Unfollow();
 
         GameObject *go = (new GameObject());
-        weak_ptr<GameObject> weak_go = Game::GetInstance().GetState().AddObject(go);
+        weak_ptr<GameObject> weak_go = Game::GetInstance().GetCurrentState().AddObject(go);
         shared_ptr<GameObject> shared_go = weak_go.lock();
 
         Sprite *death_sprite = new Sprite(*shared_go, PENGUIN_DEATH_SRC, PENGUIN_DEATH_FRAME, PENGUIN_DEATH_FM_TIME, PENGUIN_DEATH_SF_DEST);
