@@ -5,6 +5,10 @@ Game *Game::instance = nullptr;
 
 Game::Game(string title, int width, int height)
 {
+    storedState = nullptr;
+    dt = 0;
+    frameStart = SDL_GetTicks();
+
     srand(time(NULL));
     if (instance != nullptr)
     {
@@ -34,6 +38,14 @@ Game::Game(string title, int width, int height)
     }
 
     std::cout << "IMG initialized" << std::endl;
+
+    if (TTF_Init() == 1)
+    {
+        std::cout << "Unable to initialize TTF: " << TTF_GetError() << std::endl;
+        exit(1);
+    }
+
+    std::cout << "TTF initialized" << std::endl;
 
     Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, CHUNKSIZE);
 
@@ -66,13 +78,23 @@ Game::Game(string title, int width, int height)
 
 Game::~Game()
 {
-    //delete state;
+    if (storedState != nullptr)
+        delete storedState;
+
+    while (!stateStack.empty())
+        stateStack.pop();
+
+    Resources::ClearImages();
+    Resources::ClearSounds();
+    Resources::ClearMusics();
+
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     Mix_CloseAudio();
     IMG_Quit();
     Mix_Quit();
     SDL_Quit();
+    TTF_Quit();
 }
 
 Game &Game::GetInstance()
@@ -83,9 +105,9 @@ Game &Game::GetInstance()
     return *instance;
 }
 
-State &Game::GetState()
+State &Game::GetCurrentState()
 {
-    return *state;
+    return *stateStack.top();
 }
 
 SDL_Renderer *Game::GetRenderer()
@@ -93,25 +115,70 @@ SDL_Renderer *Game::GetRenderer()
     return renderer;
 }
 
+void Game::Push(State *state)
+{
+    storedState = state;
+}
+
 void Game::Run()
 {
     std::cout << "Start running" << std::endl;
 
-    state = new State;
+    // Load initial state
+    if (storedState != nullptr)
+    {
+        stateStack.emplace(storedState);
+        stateStack.top()->Start();
+        storedState = nullptr;
+    }
+    else
+        return;
+
     InputManager &IM = InputManager::GetInstance();
 
-    state->Start();
-    while (state->QuitRequested() != true)
+    while (!stateStack.top()->QuitRequested())
     {
+        if (storedState != nullptr)
+        {
+            if (!stateStack.empty())
+                stateStack.top()->Pause();
+
+            else
+                break;
+            stateStack.emplace(storedState);
+            stateStack.top()->Start();
+            storedState = nullptr;
+        }
+
+        if (stateStack.top()->PopRequested())
+        {
+            stateStack.pop();
+
+            Resources::ClearImages();
+            Resources::ClearSounds();
+            Resources::ClearMusics();
+
+            if (!stateStack.empty())
+            {
+                stateStack.top()->Resume();
+            }
+        }
+
         CalculateDeltaTime();
         IM.Update();
-        state->Update(dt);
-        state->Render();
+        stateStack.top()->Update(dt);
+        stateStack.top()->Render();
 
         SDL_RenderPresent(Game::GetInstance().GetRenderer());
         SDL_Delay(33);
     }
+
+    while (!stateStack.empty())
+        stateStack.pop();
+
     Resources::ClearImages();
+    Resources::ClearSounds();
+    // Resources::ClearMusics();
 }
 
 void Game::CalculateDeltaTime()
