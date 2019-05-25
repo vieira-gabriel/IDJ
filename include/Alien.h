@@ -30,23 +30,8 @@
 class Alien : public Component
 {
 private:
-    // class Action
-    // {
-    // public:
-    //     enum ActionType
-    //     {
-    //         MOVE,
-    //         SHOOT
-    //     };
-    //     ActionType type;
-    //     Vec2 pos;
-
-    //     Action(ActionType type, float x, float y);
-    // };
-
     Vec2 speed;
     int hp;
-    // queue<Action> taskQueue;
     vector<weak_ptr<GameObject>> minionArray;
     int nMinions;
 
@@ -62,7 +47,7 @@ private:
     Vec2 destination;
 
 public:
-    int alienCount;
+    static int alienCount;
 
     Alien(GameObject &associated, int nMinions);
     ~Alien();

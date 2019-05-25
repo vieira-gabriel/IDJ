@@ -1,5 +1,7 @@
 #include "Alien.h"
 
+int Alien::alienCount = 0;
+
 Alien::Alien(GameObject &associated, int nMinions) : Component(associated)
 {
     Sprite *alien = new Sprite(associated, ALIEN_SOURCE);
@@ -22,7 +24,6 @@ Alien::Alien(GameObject &associated, int nMinions) : Component(associated)
 Alien::~Alien()
 {
     minionArray.clear();
-
     alienCount--;
 }
 
@@ -133,7 +134,6 @@ void Alien::Update(float dt)
     }
     if (hp <= 0)
     {
-        associated.RequestDelete();
 
         GameObject *death = new GameObject();
         std::weak_ptr<GameObject> weak_ptr = Game::GetInstance().GetCurrentState().AddObject(death);
@@ -146,6 +146,7 @@ void Alien::Update(float dt)
         ptr->AddComponent(death_sound);
 
         death_sound->Play(1);
+        associated.RequestDelete();
     }
 }
 
