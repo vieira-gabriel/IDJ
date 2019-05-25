@@ -14,17 +14,21 @@ using namespace std;
 class Resources
 {
 private:
-  static unordered_map<std::string, SDL_Texture *> imageTable;
-  static unordered_map<std::string, Mix_Music *> musicTable;
-  static unordered_map<std::string, Mix_Chunk *> soundTable;
+  static unordered_map<std::string, shared_ptr<SDL_Texture>> imageTable;
+  static unordered_map<std::string, shared_ptr<Mix_Music>> musicTable;
+  static unordered_map<std::string, shared_ptr<Mix_Chunk>> soundTable;
+  static unordered_map<std::string, shared_ptr<TTF_Font>> fontTable;
 
 public:
-  static SDL_Texture *GetImage(string file);
+  static shared_ptr<SDL_Texture> GetImage(string file);
   static void ClearImages();
 
-  static Mix_Music *GetMusic(string file);
+  static shared_ptr<Mix_Music> GetMusic(string file);
   static void ClearMusics();
 
-  static Mix_Chunk *GetSound(string file);
+  static shared_ptr<Mix_Chunk> GetSound(string file);
   static void ClearSounds();
+
+  static shared_ptr<TTF_Font> GetFont(string file, int fontSize);
+  static void ClearFont();
 };

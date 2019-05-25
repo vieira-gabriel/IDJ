@@ -1,16 +1,18 @@
 #include "Resources.h"
 
-unordered_map<std::string, SDL_Texture *> Resources::imageTable;
-unordered_map<std::string, Mix_Music *> Resources::musicTable;
-unordered_map<std::string, Mix_Chunk *> Resources::soundTable;
+unordered_map<string, shared_ptr<SDL_Texture>> Resources::imageTable;
+unordered_map<string, shared_ptr<Mix_Music>> Resources::musicTable;
+unordered_map<string, shared_ptr<Mix_Chunk>> Resources::soundTable;
+unordered_map<string, shared_ptr<TTF_Font>> Resources::fontTable;
 
-unordered_map<std::string, SDL_Texture *>::iterator itTexture;
-unordered_map<std::string, Mix_Music *>::iterator itMusic;
-unordered_map<std::string, Mix_Chunk *>::iterator itChunk;
+unordered_map<string, shared_ptr<SDL_Texture>>::iterator itTexture;
+unordered_map<string, shared_ptr<Mix_Music>>::iterator itMusic;
+unordered_map<string, shared_ptr<Mix_Chunk>>::iterator itChunk;
+unordered_map<string, shared_ptr<TTF_Font>>::iterator itFont;
 
-SDL_Texture *Resources::GetImage(string file)
+shared_ptr<SDL_Texture> Resources::GetImage(string file)
 {
-    itTexture = imageTable.find(file);
+    itTexture = imageTable.find(file.c_str());
 
     if (itTexture != imageTable.end())
         return itTexture->second;
@@ -24,22 +26,23 @@ SDL_Texture *Resources::GetImage(string file)
         exit(1);
     }
 
-    imageTable[file] = texture;
-    return texture;
+    shared_ptr<SDL_Texture> s_txtr(texture, [](SDL_Texture *texture) { SDL_DestroyTexture(texture); }); //Aggregate initialization
+    imageTable[file.c_str()] = s_txtr;
+    return imageTable[file.c_str()];
 }
 
 void Resources::ClearImages()
 {
     for (itTexture = imageTable.begin(); itTexture != imageTable.end(); itTexture++)
     {
-        if (itTexture->second != nullptr)
-            SDL_DestroyTexture(itTexture->second);
+        if (itTexture->second.unique())
+            itTexture = imageTable.erase(itTexture);
     }
 
     imageTable.clear();
 }
 
-Mix_Music *Resources::GetMusic(string file)
+shared_ptr<Mix_Music> Resources::GetMusic(string file)
 {
     Mix_Music *music;
 
@@ -56,22 +59,24 @@ Mix_Music *Resources::GetMusic(string file)
         exit(1);
     }
 
-    musicTable[file] = music;
-    return music;
+    shared_ptr<Mix_Music> sharedMusic(music, [](Mix_Music *music) { Mix_FreeMusic(music); }); //Aggregate initialization
+
+    musicTable[file.c_str()] = sharedMusic;
+    return sharedMusic;
 }
 
 void Resources::ClearMusics()
 {
     for (itMusic = musicTable.begin(); itMusic != musicTable.end(); itMusic++)
     {
-        if (itMusic->second != nullptr)
-            Mix_FreeMusic(itMusic->second);
+        if (itMusic->second.unique())
+            itMusic = musicTable.erase(itMusic);
     }
 
     musicTable.clear();
 }
 
-Mix_Chunk *Resources::GetSound(string file)
+shared_ptr<Mix_Chunk> Resources::GetSound(string file)
 {
     Mix_Chunk *chunk;
 
@@ -88,17 +93,52 @@ Mix_Chunk *Resources::GetSound(string file)
         exit(1);
     }
 
-    soundTable[file] = chunk;
-    return chunk;
+    shared_ptr<Mix_Chunk> sharedChunk(chunk, [](Mix_Chunk *sound) { Mix_FreeChunk(sound); }); //Aggregate initialization
+    soundTable[file] = sharedChunk;
+    return sharedChunk;
 }
 
 void Resources::ClearSounds()
 {
     for (itChunk = soundTable.begin(); itChunk != soundTable.end(); itChunk++)
     {
-        if (itChunk->second != nullptr)
-            Mix_FreeChunk(itChunk->second);
+        if (itChunk->second.unique())
+            itChunk = soundTable.erase(itChunk);
     }
 
     soundTable.clear();
+}
+
+shared_ptr<TTF_Font> Resources::GetFont(string file, int fontSize)
+{
+    TTF_Font *font;
+
+    string extFile = file + to_string(fontSize);
+    itFont = fontTable.find(extFile.c_str());
+
+    if (itFont != fontTable.end())
+        return itFont->second;
+
+    font = TTF_OpenFont(file.c_str(), fontSize);
+
+    if (font == nullptr)
+    {
+        std::cout << "Error opening font " << file << std::endl;
+        exit(1);
+    }
+
+    shared_ptr<TTF_Font> sharedFont(font, [](TTF_Font *font) { TTF_CloseFont(font); }); //Aggregate initialization
+    fontTable[extFile] = sharedFont;
+    return sharedFont;
+}
+
+void Resources::ClearFont()
+{
+    for (itFont = fontTable.begin(); itFont != fontTable.end(); itFont++)
+    {
+        if (itFont->second.unique())
+            itFont = fontTable.erase(itFont);
+    }
+
+    fontTable.clear();
 }
