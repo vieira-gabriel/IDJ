@@ -2,15 +2,24 @@
 
 TitleState::TitleState()
 {
+    shared_ptr<GameObject> GOSprite = shared_ptr<GameObject>(new GameObject());
+    Sprite *titleSprite = new Sprite(*GOSprite, TITLE_SPRITE);
+
+    GOSprite->box.x = 0;
+    GOSprite->box.y = 0;
+    GOSprite->box.w = titleSprite->GetWidth();
+    GOSprite->box.h = titleSprite->GetHeight();
+
     shared_ptr<GameObject> GOTitle = shared_ptr<GameObject>(new GameObject());
-    Sprite *titleSprite = new Sprite(*GOTitle, TITLE_SPRITE);
+    Text *text = new Text(*GOTitle.get(), TITLE_SOURCE, 50, Text::TextStyle::BLENDED, TITLE_TEXT, {190, 50, 50, 255});
 
-    GOTitle->box.x = 0;
-    GOTitle->box.y = 0;
-    GOTitle->box.w = titleSprite->GetWidth();
-    GOTitle->box.h = titleSprite->GetHeight();
+    GOTitle->box.SetCenter({514, 500});
+    GOSprite->box.w = titleSprite->GetWidth();
+    GOSprite->box.h = titleSprite->GetHeight();
 
-    GOTitle->AddComponent(titleSprite);
+    GOSprite->AddComponent(titleSprite);
+    GOTitle->AddComponent(text);
+    objectArray.emplace_back(move(GOSprite));
     objectArray.emplace_back(move(GOTitle));
 }
 
