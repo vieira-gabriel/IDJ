@@ -39,7 +39,7 @@ public:
   bool IsOpen();
   void Update(float dt);
   bool Is(string type);
-  void SetScaleX(float scaleX, float scaleY);
+  void SetScale(float scaleX, float scaleY);
   Vec2 GetScale();
   void SetFrame(int frame);
   void SetFrameCount(int frameCount);

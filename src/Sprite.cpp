@@ -49,7 +49,7 @@ void Sprite::Open(string file)
     SDL_QueryTexture(texture.get(), format, access, &width, &height);
     SetClip(X_DEFAULT, Y_DEFAULT, GetWidth(), GetHeight());
 
-    associated.box.w = width;
+    associated.box.w = width / frameCount;
     associated.box.h = height;
 }
 
@@ -128,7 +128,7 @@ bool Sprite::Is(string type)
     // Return true if the type wanted is Sprite
     return (type == "Sprite");
 }
-void Sprite::SetScaleX(float scaleX, float scaleY)
+void Sprite::SetScale(float scaleX, float scaleY)
 {
     Vec2 newScale = Vec2(scaleX, scaleY);
     if (newScale > Vec2(0, 0))
