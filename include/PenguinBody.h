@@ -7,7 +7,7 @@
 #include "InputManager.h"
 
 #define PENGUIN_BODY_SOURCE "assets/img/penguin.png"
-#define PENGUIN_HP 100
+#define PENGUIN_HP 80
 #define PENGUIN_ACCELERATION 60.0
 #define PENGUIN_ANGULAR_VEL 80.0 * (PI / 180.0)
 #define MAXIMUM_SPEED_MOD 300.0

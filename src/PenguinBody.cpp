@@ -77,10 +77,19 @@ void PenguinBody::Update(float dt)
     associated.box += speed * dt;
     associated.angleDeg = angle * (180 / PI);
 
+    if (associated.box.x > 1280)
+        associated.box.x = 1280;
+    else if (associated.box.x < 0)
+        associated.box.x = 0;
+
+    if (associated.box.y > 1280)
+        associated.box.y = 1280;
+    else if (associated.box.y < 0)
+        associated.box.y = 0;
+
     if (hp <= 0)
     {
         hp = 0;
-        associated.RequestDelete();
 
         shared_ptr<GameObject> shared_cannon = pcannon.lock();
 
@@ -101,6 +110,7 @@ void PenguinBody::Update(float dt)
         shared_go->AddComponent(death_sound);
 
         death_sound->Play(1);
+        associated.RequestDelete();
     }
 }
 
