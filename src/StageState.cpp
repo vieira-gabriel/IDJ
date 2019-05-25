@@ -35,17 +35,41 @@ StageState::StageState() : backgroundMusic(BACKGROUND_MUSIC)
     started = false;
     backgroundMusic.Play(-1);
 
-    // Create and initialize Alien
-    GameObject *alien_GO = new GameObject();
-    weak_ptr<GameObject> weak_alien = AddObject(alien_GO);
-    shared_ptr<GameObject> alien = weak_alien.lock();
+    // Create and initialize first Alien
+    GameObject *alien1_GO = new GameObject();
+    weak_ptr<GameObject> weak_alien1 = AddObject(alien1_GO);
+    shared_ptr<GameObject> alien1 = weak_alien1.lock();
 
-    alien->box.x = 512;
-    alien->box.y = 300;
+    alien1->box.x = 200;
+    alien1->box.y = 300;
 
-    Alien *theAlien = new Alien(*alien, MINIONS);
+    Alien *theAlien1 = new Alien(*alien1, MINIONS);
 
-    alien->AddComponent(theAlien);
+    alien1->AddComponent(theAlien1);
+
+    // Create and initialize second Alien
+    GameObject *alien2_GO = new GameObject();
+    weak_ptr<GameObject> weak_alien2 = AddObject(alien2_GO);
+    shared_ptr<GameObject> alien2 = weak_alien2.lock();
+
+    alien2->box.x = 1200;
+    alien2->box.y = 600;
+
+    Alien *theAlien2 = new Alien(*alien2, MINIONS);
+
+    alien2->AddComponent(theAlien2);
+
+    // Create and initialize third Alien
+    GameObject *alien3_GO = new GameObject();
+    weak_ptr<GameObject> weak_alien3 = AddObject(alien3_GO);
+    shared_ptr<GameObject> alien3 = weak_alien3.lock();
+
+    alien3->box.x = 600;
+    alien3->box.y = 900;
+
+    Alien *theAlien3 = new Alien(*alien3, MINIONS);
+
+    alien3->AddComponent(theAlien3);
 
     // Create and initialize Penguin
     GameObject *penguin_GO = new GameObject();
@@ -79,11 +103,37 @@ void StageState::Update(float dt)
     if (IM.QuitRequested() || IM.KeyPress(ESCAPE_KEY))
         quitRequested = true;
 
+    // Verify if the player won or lose
+
+    if (Alien::alienCount == 0)
+    {
+        GameData::playerVictory = true;
+        EndState *stage = new EndState();
+        popRequested = true;
+
+        Camera::pos.x = 0;
+        Camera::pos.y = 0;
+
+        Game::GetInstance().Push(stage);
+    }
+    else if (PenguinBody::player == nullptr)
+    {
+        Alien::alienCount = 0;
+        GameData::playerVictory = false;
+        EndState *stage = new EndState();
+        popRequested = true;
+
+        Camera::pos.x = 0;
+        Camera::pos.y = 0;
+
+        Game::GetInstance().Push(stage);
+    }
+
     for (unsigned int i = 0; i < objectArray.size(); i++)
     {
-        objectArray[i]->Update(dt);
         if (objectArray[i]->IsDead())
             objectArray.erase(objectArray.begin() + i);
+        objectArray[i]->Update(dt);
     }
 
     for (unsigned int i = 0; i < objectArray.size(); i++)

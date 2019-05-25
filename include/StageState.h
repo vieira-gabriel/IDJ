@@ -1,6 +1,9 @@
 #pragma once
 
 #include "State.h"
+#include "TitleState.h"
+#include "EndState.h"
+#include "GameData.h"
 
 class StageState : public State
 {
