@@ -1,13 +1,13 @@
 #include <iostream>
 #include "Game.h"
-#include "StageState.h"
+#include "TitleState.h"
 
 using namespace std;
 
 int main(int argc, char **argv)
 {
     Game &game = Game::GetInstance();
-    StageState *stg = new StageState();
+    TitleState *stg = new TitleState();
 
     std::cout << "Game created" << std::endl
               << "Starting game" << std::endl;
