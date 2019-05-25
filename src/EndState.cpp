@@ -2,6 +2,15 @@
 
 EndState::EndState()
 {
+}
+
+EndState::~EndState()
+{
+    objectArray.clear();
+}
+
+void EndState::LoadAssets()
+{
     GameObject *GOEnd = new GameObject();
 
     weak_ptr<GameObject> weakEnd = AddObject(GOEnd);
@@ -45,15 +54,6 @@ EndState::EndState()
     sharedText->AddComponent(tx1);
     sharedText2->AddComponent(tx2);
     sharedEnd->AddComponent(follow);
-}
-
-EndState::~EndState()
-{
-    objectArray.clear();
-}
-
-void EndState::LoadAssets()
-{
 }
 
 void EndState::Update(float dt)

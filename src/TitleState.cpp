@@ -2,6 +2,15 @@
 
 TitleState::TitleState()
 {
+}
+
+TitleState::~TitleState()
+{
+    objectArray.clear();
+}
+
+void TitleState::LoadAssets()
+{
     shared_ptr<GameObject> GOSprite = shared_ptr<GameObject>(new GameObject());
     Sprite *titleSprite = new Sprite(*GOSprite, TITLE_SPRITE);
 
@@ -21,15 +30,6 @@ TitleState::TitleState()
     GOTitle->AddComponent(text);
     objectArray.emplace_back(move(GOSprite));
     objectArray.emplace_back(move(GOTitle));
-}
-
-TitleState::~TitleState()
-{
-    objectArray.clear();
-}
-
-void TitleState::LoadAssets()
-{
 }
 
 void TitleState::Update(float dt)

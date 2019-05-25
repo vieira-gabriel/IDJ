@@ -2,6 +2,15 @@
 
 StageState::StageState() : backgroundMusic(BACKGROUND_MUSIC)
 {
+}
+
+StageState::~StageState()
+{
+    objectArray.clear();
+}
+
+void StageState::LoadAssets()
+{
     // Create and initialize Background
     shared_ptr<GameObject> GOBg = shared_ptr<GameObject>(new GameObject());
     Sprite *newSprite = new Sprite(*GOBg, BACKGROUND_SPRITE);
@@ -84,15 +93,6 @@ StageState::StageState() : backgroundMusic(BACKGROUND_MUSIC)
     PenguinBody *thePenguin = new PenguinBody(*penguin);
 
     penguin->AddComponent(thePenguin);
-}
-
-StageState::~StageState()
-{
-    objectArray.clear();
-}
-
-void StageState::LoadAssets()
-{
 }
 
 void StageState::Update(float dt)
