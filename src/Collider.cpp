@@ -4,6 +4,9 @@ Collider::Collider(GameObject &associated, Vec2 scale, Vec2 offset) : Component(
 {
     this->scale = scale;
     this->offset = offset;
+
+    box.w = associated.box.w * scale.x;
+    box.h = associated.box.h * scale.y;
 }
 
 void Collider::Update(float dt)
@@ -46,6 +49,8 @@ bool Collider::Is(string type)
 void Collider::SetScale(Vec2 scale)
 {
     this->scale = scale;
+    box.w = associated.box.w * scale.x;
+    box.h = associated.box.h * scale.y;
 }
 
 void Collider::SetOffset(Vec2 offset)

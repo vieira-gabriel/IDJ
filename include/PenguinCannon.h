@@ -6,7 +6,7 @@
 #include "Timer.h"
 
 #define CANNON_SOURCE "assets/img/cubngun.png"
-#define PENGUIN_BULLET_SPEED 200
+#define PENGUIN_BULLET_SPEED 300
 #define PENGUIN_BULLET_DAMAGE 10
 #define PENGUIN_BULLET_DISTANCE 1000
 #define PENGUIN_BULLET_SOURCE "assets/img/penguinbullet.png"

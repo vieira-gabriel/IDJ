@@ -24,9 +24,7 @@ void GameObject::Update(float dt)
 {
     // Update all components of the vector
     for (unsigned int i = 0; i < components.size(); i++)
-    {
         components[i]->Update(dt);
-    }
 }
 
 void GameObject::Render()

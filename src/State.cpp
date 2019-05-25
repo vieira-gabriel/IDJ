@@ -56,17 +56,12 @@ void State::UpdateArray(float dt)
 {
     for (unsigned int i = 0; i < objectArray.size(); i++)
     {
-        objectArray[i]->Update(dt);
+        if (objectArray[i]->IsDead())
+            objectArray.erase(objectArray.begin() + i);
     }
-
     for (unsigned int i = 0; i < objectArray.size(); i++)
     {
-        if (objectArray[i]->IsDead())
-        {
-            vector<shared_ptr<GameObject>>::iterator it = objectArray.begin() + i;
-            objectArray.erase(it);
-            i--;
-        }
+        objectArray[i]->Update(dt);
     }
 }
 

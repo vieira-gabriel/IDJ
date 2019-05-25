@@ -8,7 +8,7 @@
 
 #define MINION_AGULAR_VEL 20.0 * PI / 180
 #define MINION_BULLET_DAMAGE 5
-#define MINION_BULLET_SPEED 200
+#define MINION_BULLET_SPEED 300
 #define MINION_BULLET_DISTANCE 1000
 
 #define MINION_SOURCE "assets/img/minion.png"

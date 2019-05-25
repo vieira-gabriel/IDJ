@@ -8,7 +8,7 @@ Minion::Minion(GameObject &associated, weak_ptr<GameObject> alienCenter, float a
     associated.AddComponent(coliderBox);
 
     float scale = (float(rand() % 50 + 1) / 100.0) + 1.0;
-    minion->SetScaleX(scale, scale);
+    minion->SetScale(scale, scale);
 
     associated.AddComponent(minion);
 

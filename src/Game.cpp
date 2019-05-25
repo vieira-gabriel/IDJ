@@ -175,9 +175,6 @@ void Game::Run()
         SDL_Delay(33);
     }
 
-    while (!stateStack.empty())
-        stateStack.pop();
-
     Resources::ClearImages();
     Resources::ClearSounds();
     // Resources::ClearMusics();
